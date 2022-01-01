@@ -1,3 +1,9 @@
 <resources>
+    //base
     <string name="app_name">Fire Rescue</string>
+    //splash_screen
+    <string name="name">Fire Rescue</string>
+    //dashboard
+    <string name="department_name">Colombo Fire Brigade</string>
+    <string name="province_name">Western Province</string>
 </resources>

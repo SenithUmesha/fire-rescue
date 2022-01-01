@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/alerts"
+        android:icon="@drawable/notification"
+        android:title="Alerts"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/news"
+        android:icon="@drawable/news"
+        android:title="News"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/holder"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:enabled="false"/>
+    <item
+        android:id="@+id/events"
+        android:icon="@drawable/events"
+        android:title="Events"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/social_media"
+        android:icon="@drawable/social_media"
+        android:title="Social Media"
+        app:showAsAction="ifRoom" />
+</menu>

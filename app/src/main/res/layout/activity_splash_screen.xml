@@ -23,7 +23,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:fontFamily="@font/productsansbold"
-      android:text="Fire Rescue"
+      android:text="@string/name"
       android:textColor="@color/dark_red"
       android:textSize="36sp"
       app:layout_constraintEnd_toEndOf="parent"
