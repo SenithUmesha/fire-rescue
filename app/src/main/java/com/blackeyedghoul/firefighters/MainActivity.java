@@ -62,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
                 startActivity(getIntent());
+
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fab_grow);
+                fab.startAnimation(animation);
+
+                if (view.getId() == R.id.fab) {
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
             }
         });
 
