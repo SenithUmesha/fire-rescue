@@ -27,14 +27,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/productsansregular"
+                android:fontFamily="@font/product_sans_regular"
                 android:text="@string/province_name"
                 android:textColor="@color/light_pink"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/title"
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="36dp"
-                android:fontFamily="@font/productsansbold"
+                android:fontFamily="@font/product_sans_bold"
                 android:text="@string/department_name"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -58,7 +59,8 @@
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/settings"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="37dp"
@@ -80,12 +82,13 @@
                     app:cardElevation="0dp">
 
                     <TextView
+                        android:id="@+id/temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/productsansregular"
+                        android:fontFamily="@font/product_sans_regular"
                         android:gravity="center"
-                        android:text="27\u2103"
+                        android:text="@string/weather"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -101,7 +104,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sub_title" />
+                app:layout_constraintTop_toBottomOf="@+id/sub_title"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -150,18 +154,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/firefighter"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/firefighter"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -172,8 +178,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Chief's\nWelcome"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_0"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -211,18 +217,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="17dp"
-                                    android:src="@drawable/station"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/station"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -233,8 +241,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Stations\n"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_1"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -272,18 +280,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/commend"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/commend"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -294,8 +304,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Commend a Firefighter"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_2"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -334,18 +344,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/contacts"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/contacts"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -356,8 +368,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Contact\nDirectory"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_3"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -395,18 +407,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="19dp"
-                                    android:src="@drawable/checklist"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/checklist"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -417,8 +431,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Fire Safety\nChecklist"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_4"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -456,18 +470,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/fire"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fire"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -478,8 +494,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Burn\nPermits"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_5"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -518,18 +534,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/firetruck"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/firetruck"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -540,8 +558,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Request an Appearance"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_6"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -579,18 +597,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/faq"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/faq"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -601,8 +621,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="FAQ\n"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_7"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -640,18 +660,20 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="1.5dp"
                                 android:backgroundTint="@color/white_gray"
-                                app:cardCornerRadius="150dp"
-                                app:cardElevation="0dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:foreground="@drawable/ripple_round">
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:scaleType="fitXY"
                                     android:layout_margin="15dp"
-                                    android:src="@drawable/contact_us"/>
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/contact_us"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -662,8 +684,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textAlignment="center"
-                            android:fontFamily="@font/productsansregular"
-                            android:text="Contact\nUs"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_8"
                             android:textColor="@color/dark_black"
                             android:textSize="14sp" />
 
@@ -712,6 +734,7 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -723,6 +746,6 @@
         app:layout_anchor="@id/bottom_appbar"
         app:maxImageSize="40dp"
         android:foreground="@drawable/ripple_round"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

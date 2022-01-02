@@ -6,4 +6,14 @@
     //dashboard
     <string name="department_name">Colombo Fire Brigade</string>
     <string name="province_name">Western Province</string>
+    <string name="btn_0">Chief\'s\nWelcome</string>
+    <string name="btn_1">Stations\n</string>
+    <string name="btn_2">Commend a Firefighter</string>
+    <string name="btn_3">Contact\nDirectory</string>
+    <string name="btn_4">Fire Safety\nChecklist</string>
+    <string name="btn_5">Burn\nPermits</string>
+    <string name="btn_6">Request an Appearance</string>
+    <string name="btn_7">FAQ\n</string>
+    <string name="btn_8">Contact\nUs</string>
+    <string name="weather">N/C</string>
 </resources>
