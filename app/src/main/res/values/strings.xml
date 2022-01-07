@@ -16,4 +16,6 @@
     <string name="btn_7">FAQ\n</string>
     <string name="btn_8">Contact\nUs</string>
     <string name="weather">N/C</string>
+    <string name="ld_title">Live Dispatch Radio</string>
+    <string name="ld_subTitle">This feed is being provided by Colombo Fire Brigade, located in WP. The feed will provide a cycle of dispatch and tac channels for Fire and EMS only.</string>
 </resources>

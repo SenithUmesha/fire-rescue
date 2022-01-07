@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".LiveDispatch">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ld_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_red"
+        android:elevation="20dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ld_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="-5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
+            app:elevation="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/ld_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/ld_title"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ld_back" />
+
+        <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/ld_subTitle"
+            android:textColor="@color/light_pink"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ld_title"
+            tools:ignore="TextContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/ld_lottieAnimationView"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/optRoundCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ld_header"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/red_ripple" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="150dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintEnd_toEndOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintStart_toStartOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintTop_toTopOf="@+id/ld_lottieAnimationView"/>
+
+    <ImageView
+        android:id="@+id/ld_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:elevation="12dp"
+        android:src="@drawable/play"
+        app:layout_constraintBottom_toBottomOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintEnd_toEndOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintStart_toStartOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintTop_toTopOf="@+id/ld_lottieAnimationView"
+        tools:ignore="ContentDescription"
+        android:foreground="@drawable/ripple_round"/>
+
+    <ImageView
+        android:id="@+id/ld_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:elevation="12dp"
+        android:src="@drawable/pause"
+        app:layout_constraintBottom_toBottomOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintEnd_toEndOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintStart_toStartOf="@+id/ld_lottieAnimationView"
+        app:layout_constraintTop_toTopOf="@+id/ld_lottieAnimationView"
+        tools:ignore="ContentDescription"
+        android:foreground="@drawable/ripple_round"/>
+
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
+        android:id="@+id/optRoundCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:optRoundCardBackgroundColor="@color/dark_red"
+        app:optRoundCardCornerRadius="20sp"
+        app:optRoundCardElevation="50dp"
+        app:optRoundCardLeftBottomCorner="false"
+        app:optRoundCardPreventCornerOverlap="false"
+        app:optRoundCardRightBottomCorner="false"
+        app:optRoundContentPaddingTop="20dp"
+        app:optRoundContentPaddingRight="20dp"
+        app:optRoundContentPaddingLeft="20dp"
+        app:optRoundContentPaddingBottom="20dp">
+
+        <SeekBar
+            android:id="@+id/ld_seekBar"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:progress="50"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:progressTint="@color/white"
+            android:thumbTint="@color/white" />
+
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

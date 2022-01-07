@@ -1,6 +1,7 @@
 package com.blackeyedghoul.firefighters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
@@ -26,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     TextView tempTxt;
     DecimalFormat df = new DecimalFormat("#");
+    CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,16 @@ public class MainActivity extends AppCompatActivity {
                 fab.startAnimation(animation);
 
                 if (view.getId() == R.id.fab) {
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 }
+            }
+        });
+
+        card_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
+                startActivity(intent);
             }
         });
 
@@ -79,13 +89,22 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         tempTxt = findViewById(R.id.temp);
         fab = findViewById(R.id.fab);
+        card_0 = findViewById(R.id.card_0);
+        card_1 = findViewById(R.id.card_1);
+        card_2 = findViewById(R.id.card_2);
+        card_3 = findViewById(R.id.card_3);
+        card_4 = findViewById(R.id.card_4);
+        card_5 = findViewById(R.id.card_5);
+        card_6 = findViewById(R.id.card_6);
+        card_7 = findViewById(R.id.card_7);
+        card_8 = findViewById(R.id.card_8);
     }
 
     private void getWeatherDetails() {
         String tempUrl;
 
         if (!isConnected(MainActivity.this)) {
-            Toast.makeText(this, "Online features will be unavailable. Please check your internet connection and try again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Online features will be unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
         } else {
             String api_key = "aa08a65605580df4a2fd2089f117b732";
             String url = "https://api.openweathermap.org/data/2.5/weather";

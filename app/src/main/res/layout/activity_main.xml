@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_gray"
+    android:id="@+id/coordinatorLayout"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -149,6 +150,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_0"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -212,6 +214,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_1"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -275,6 +278,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_2"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -339,6 +343,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_3"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -402,6 +407,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_4"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -465,6 +471,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_5"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -529,6 +536,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_6"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -592,6 +600,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_7"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
@@ -655,6 +664,7 @@
                             app:cardElevation="0dp">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_8"
                                 android:layout_width="97dp"
                                 android:layout_height="97dp"
                                 android:layout_gravity="center_horizontal"
