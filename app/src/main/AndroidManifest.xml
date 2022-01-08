@@ -14,6 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firefighters">
         <activity
+            android:name=".ContactList"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".LiveDispatch"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
@@ -27,6 +35,7 @@
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

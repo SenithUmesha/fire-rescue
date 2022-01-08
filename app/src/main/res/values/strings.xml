@@ -22,4 +22,13 @@
     <string name="ld_subTitle">This feed is being provided by Colombo Fire Brigade, located in WP. The feed will provide a cycle of dispatch and tac channels for Fire and EMS only.</string>
     <string name="ld_feed_status">Feed Status : N/A</string>
     <string name="ld_feed_status_online">Feed Status : Online</string>
+    //contact_list
+    <string name="cl_title">Contact Directory</string>
+    <string name="cl_position">Position</string>
+    <string name="cl_station">Station</string>
+    <string name="cl_dash">|</string>
+    <string name="cl_email">Email</string>
+    <string name="cl_phone_number">Phone Number</string>
+    <string name="cl_full_name">Full Name</string>
+    <string name="cl_id" />
 </resources>

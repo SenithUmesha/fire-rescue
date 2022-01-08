@@ -21,7 +21,7 @@ public class LiveDispatch extends AppCompatActivity {
     LottieAnimationView ripple;
     AudioManager audioManager;
     TextView feedStatus;
-    String url = "https://listen.broadcastify.com/r361pmzg4dy9758.mp3?nc=48244&xan=xtf9912b41c";
+    String url = "https://listen.broadcastify.com/b5gmp9fc206tyzd.mp3?nc=43859&xan=xtf9912b41c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

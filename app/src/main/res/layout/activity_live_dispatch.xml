@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/dark_red"
         android:elevation="20dp"
-        android:paddingTop="20dp"
         android:paddingLeft="25dp"
+        android:paddingTop="20dp"
         android:paddingRight="25dp"
         android:paddingBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,25 +35,24 @@
 
         <TextView
             android:id="@+id/ld_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/product_sans_bold"
             android:text="@string/ld_title"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ld_back" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sub_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/product_sans_regular"
             android:text="@string/ld_subTitle"
             android:textColor="@color/light_pink"
