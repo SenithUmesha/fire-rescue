@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     TextView tempTxt;
     DecimalFormat df = new DecimalFormat("#");
-    CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8;
+    CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8, card_9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        card_0.setOnClickListener(new View.OnClickListener() {
+        card_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         card_6 = findViewById(R.id.card_6);
         card_7 = findViewById(R.id.card_7);
         card_8 = findViewById(R.id.card_8);
+        card_9 = findViewById(R.id.card_9);
     }
 
     private void getWeatherDetails() {

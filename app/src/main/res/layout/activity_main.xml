@@ -705,6 +705,95 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="8dp"
+                    app:cardBackgroundColor="@color/white_gray"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center_horizontal"
+                            android:backgroundTint="@color/dark_black"
+                            app:cardCornerRadius="150dp"
+                            app:cardElevation="0dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_9"
+                                android:layout_width="97dp"
+                                android:layout_height="97dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="1.5dp"
+                                android:backgroundTint="@color/white_gray"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="@drawable/ripple_round"
+                                app:cardCornerRadius="150dp"
+                                app:cardElevation="0dp"
+                                tools:ignore="SpeakableTextPresentCheck">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="15dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/radio"
+                                    tools:ignore="ContentDescription" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="@string/btn_9"
+                            android:textColor="@color/dark_black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="75dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/white_gray"
+                    app:cardElevation="0dp"
+                    android:visibility="invisible"
+                    android:clickable="false"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="75dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/white_gray"
+                    app:cardElevation="0dp"
+                    android:visibility="invisible"
+                    android:clickable="false"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="75dp"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"

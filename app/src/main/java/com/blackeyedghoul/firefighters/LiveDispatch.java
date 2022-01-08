@@ -1,10 +1,5 @@
 package com.blackeyedghoul.firefighters;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,9 +8,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.github.captain_miao.optroundcardview.OptRoundCardView;
 
 public class LiveDispatch extends AppCompatActivity {
 
@@ -23,6 +20,8 @@ public class LiveDispatch extends AppCompatActivity {
     SeekBar volumeBar;
     LottieAnimationView ripple;
     AudioManager audioManager;
+    TextView feedStatus;
+    String url = "https://listen.broadcastify.com/r361pmzg4dy9758.mp3?nc=48244&xan=xtf9912b41c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class LiveDispatch extends AppCompatActivity {
         Init();
 
         pause.setVisibility(View.GONE);
-
         MediaPlayer mp = new MediaPlayer();
 
         play.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +43,6 @@ public class LiveDispatch extends AppCompatActivity {
                 ripple.loop(true);
                 ripple.playAnimation();
 
-                String url = "https://listen.broadcastify.com/r361pmzg4dy9758.mp3?nc=48244&xan=xtf9912b41c";
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                 try {
@@ -56,6 +53,7 @@ public class LiveDispatch extends AppCompatActivity {
                 }
 
                 try {
+                    feedStatus.setText(R.string.ld_feed_status_online);
                     mp.prepare();
                 }
                 catch (Exception e) {
@@ -81,6 +79,7 @@ public class LiveDispatch extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.stop();
                 onBackPressed();
             }
         });
@@ -116,9 +115,9 @@ public class LiveDispatch extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-            volumeBar.setProgress((volumeBar.getProgress()+1>volumeBar.getMax())?volumeBar.getMax():volumeBar.getProgress()+1);
+            volumeBar.setProgress(Math.min(volumeBar.getProgress() + 1, volumeBar.getMax()));
         }else if (keyCode==KeyEvent.KEYCODE_VOLUME_DOWN){
-            volumeBar.setProgress((volumeBar.getProgress()-1<0)?0:volumeBar.getProgress()-1);
+            volumeBar.setProgress(Math.max(volumeBar.getProgress() - 1, 0));
         }
 
         return super.onKeyDown(keyCode, event);
@@ -130,5 +129,6 @@ public class LiveDispatch extends AppCompatActivity {
         volumeBar = findViewById(R.id.ld_seekBar);
         ripple = findViewById(R.id.ld_lottieAnimationView);
         back = findViewById(R.id.ld_back);
+        feedStatus = findViewById(R.id.ld_feed_status);
     }
 }
