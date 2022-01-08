@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
@@ -64,6 +66,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public int getItemCount() {
         return contactsList.size();
+    }
+
+    public void filterList(List<Contacts> filteredList) {
+        contactsList = filteredList;
+        notifyDataSetChanged();
     }
 
     /*

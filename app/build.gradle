@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.airbnb.android:lottie:3.4.3'
     implementation 'com.github.captain-miao:optroundcardview:1.0.0'
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 }
