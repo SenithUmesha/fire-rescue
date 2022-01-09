@@ -74,18 +74,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        card_9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
-                startActivity(intent);
-            }
-        });
-
         card_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ContactList.class);
+                startActivity(intent);
+            }
+        });
+
+        card_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ContactUs.class);
+                startActivity(intent);
+            }
+        });
+
+        card_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
                 startActivity(intent);
             }
         });

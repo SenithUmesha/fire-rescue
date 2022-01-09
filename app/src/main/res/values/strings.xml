@@ -31,4 +31,11 @@
     <string name="cl_phone_number">Phone Number</string>
     <string name="cl_full_name">Full Name</string>
     <string name="cl_id" />
+    //contact_us
+    <string name="cu_contact_us">Contact Us</string>
+    <string name="cu_location">Main Fire Station (HQ)\nT.B. Jaya Mawatha, Colombo 10</string>
+    <string name="cu_tel">Chief Fire Officer : 011 2686087\nAdministration Office : 0112686406</string>
+    <string name="cu_fax">011-2692222</string>
+    <string name="cu_open_map">Open Map</string>
+    <string name="cu_emergency">011-2422222\n011-2422223</string>
 </resources>

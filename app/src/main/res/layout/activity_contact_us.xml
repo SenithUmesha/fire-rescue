@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ContactUs">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_red"
+        android:elevation="20dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="20dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cu_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/cu_contact_us"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cu_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="-5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
+            app:elevation="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="395dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/fire_equipment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cu_title"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/cu_location_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_header"
+        app:srcCompat="@drawable/location"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/cu_phone_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_openMap"
+        app:srcCompat="@drawable/ringing"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/cu_fax_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_phone"
+        app:srcCompat="@drawable/fax"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/cu_emergency_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_fax"
+        app:srcCompat="@drawable/exit"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/cu_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:text="@string/cu_location"
+        android:textColor="@color/dark_black"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_location_img"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/cu_openMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:selectAllOnFocus="true"
+        android:linksClickable="true"
+        android:autoLink="all"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/product_sans_regular"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/cu_open_map"
+        android:textAlignment="center"
+        android:textColor="@color/dark_red"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_location"
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/cu_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/cu_tel"
+        android:textAlignment="center"
+        android:textColor="@color/dark_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_phone_img"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/cu_fax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/cu_fax"
+        android:textAlignment="center"
+        android:textColor="@color/dark_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_fax_img"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/cu_emergency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/cu_emergency"
+        android:textAlignment="center"
+        android:textColor="@color/dark_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cu_emergency_img"
+        tools:ignore="TextContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
