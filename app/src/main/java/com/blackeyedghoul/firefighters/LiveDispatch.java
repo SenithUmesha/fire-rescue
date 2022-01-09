@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -47,16 +48,14 @@ public class LiveDispatch extends AppCompatActivity {
 
                 try {
                     mp.setDataSource(url);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 try {
                     feedStatus.setText(R.string.ld_feed_status_online);
                     mp.prepare();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 mp.start();
@@ -73,6 +72,9 @@ public class LiveDispatch extends AppCompatActivity {
                 ripple.playAnimation();
 
                 mp.stop();
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -106,17 +108,16 @@ public class LiveDispatch extends AppCompatActivity {
 
                 }
             });
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             volumeBar.setProgress(Math.min(volumeBar.getProgress() + 1, volumeBar.getMax()));
-        }else if (keyCode==KeyEvent.KEYCODE_VOLUME_DOWN){
+        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             volumeBar.setProgress(Math.max(volumeBar.getProgress() - 1, 0));
         }
 

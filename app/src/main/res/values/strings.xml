@@ -38,4 +38,7 @@
     <string name="cu_fax">011-2692222</string>
     <string name="cu_open_map">Open Map</string>
     <string name="cu_emergency">011-2422222\n011-2422223</string>
+    <string name="faq_title">FAQ</string>
+    <string name="faq_topic">Topic</string>
+    <string name="faq_subtopic">SubTopic</string>
 </resources>

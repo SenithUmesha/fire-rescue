@@ -82,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        card_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FAQs.class);
+                startActivity(intent);
+            }
+        });
+
         card_8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
