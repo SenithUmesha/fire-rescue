@@ -63,7 +63,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/faq_divider"
         android:layout_width="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"

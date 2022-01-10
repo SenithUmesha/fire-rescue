@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.dark_red));
 
-        Init();
+        init();
 
         bottomNavigationView.setBackground(null);
 
@@ -71,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 if (view.getId() == R.id.fab) {
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 }
+            }
+        });
+
+        card_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Commends.class);
+                startActivity(intent);
             }
         });
 
@@ -109,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         getWeatherDetails();
     }
 
-    private void Init() {
+    private void init() {
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         tempTxt = findViewById(R.id.temp);
         fab = findViewById(R.id.fab);

@@ -24,7 +24,7 @@ public class FAQs extends AppCompatActivity {
         setContentView(R.layout.activity_faqs);
         getWindow().setStatusBarColor(ContextCompat.getColor(FAQs.this, R.color.dark_red));
 
-        Init();
+        init();
         setData();
         setRecycleView();
 
@@ -57,7 +57,7 @@ public class FAQs extends AppCompatActivity {
         faqList.add(new FAQ("Take Care Of Your Mental Health", "Running up and down stairs ought to help with the physical fitness, but you need to ensure that you keep your brain in tip top form too. You don’t fight fires with your back, you fight them with your mind."));
     }
 
-    private void Init() {
+    private void init() {
         recyclerView = findViewById(R.id.faq_recyclerView);
         back = findViewById(R.id.faq_back);
     }

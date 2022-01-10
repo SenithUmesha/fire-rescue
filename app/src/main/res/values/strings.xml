@@ -41,4 +41,14 @@
     <string name="faq_title">FAQ</string>
     <string name="faq_topic">Topic</string>
     <string name="faq_subtopic">SubTopic</string>
+    //commends
+    <string name="cm_commend">Commend</string>
+    <string name="cm_name">Name</string>
+    <string name="cm_enter_name">Enter name</string>
+    <string name="cm_feedback">Feedback</string>
+    <string name="cm_feedback_hint">Tell us about your experience</string>
+    <string name="cm_submit">Submit</string>
+    <string name="cm_success">Success</string>
+    <string name="cm_commendation_submitted">Your letter has been submitted</string>
+    <string name="cm_close">Close</string>
 </resources>

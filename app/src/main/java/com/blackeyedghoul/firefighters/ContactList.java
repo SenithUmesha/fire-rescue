@@ -41,7 +41,7 @@ public class ContactList extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
         getWindow().setStatusBarColor(ContextCompat.getColor(ContactList.this, R.color.dark_red));
 
-        Init();
+        init();
 
         PreCreateDB.copyDB(this);
         databaseAdapter = new DatabaseAdapter(this);
@@ -131,7 +131,7 @@ public class ContactList extends AppCompatActivity {
         contactsAdapter.filterList(filteredList);
     }
 
-    private void Init() {
+    private void init() {
         searchView = findViewById(R.id.cl_search_view);
         title = findViewById(R.id.cl_title);
         back = findViewById(R.id.cl_back);
