@@ -38,6 +38,9 @@
         <ImageView
             android:id="@+id/cu_back"
             android:layout_width="35dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="35dp"
             android:layout_marginStart="-5dp"
             android:scaleType="fitXY"

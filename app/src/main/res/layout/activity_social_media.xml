@@ -5,22 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ContactList">
-
-    <ImageView
-        android:id="@+id/ld_back2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="-5dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/back"
-        app:elevation="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+    tools:context=".SocialMedia">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ld_header"
+        android:id="@+id/sm_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_red"
@@ -28,19 +16,19 @@
         android:paddingLeft="25dp"
         android:paddingTop="20dp"
         android:paddingRight="25dp"
-        android:paddingBottom="30dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/cl_title"
+            android:id="@+id/sm_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/product_sans_bold"
-            android:text="@string/cl_title"
+            android:text="@string/sm_title"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -48,44 +36,42 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/cl_back"
+            android:id="@+id/sm_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="-5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/back"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
             app:elevation="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/cl_search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:queryHint="Search"
-            android:animateLayoutChanges="true"
-            app:iconifiedByDefault="false"
-            android:background="@drawable/bg_search_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_title" />
+            tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cl_recycler_view"
+    <ProgressBar
+        android:id="@+id/sm_pb"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:paddingBottom="62dp"
+        android:layout_height="5dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/light_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sm_header" />
+
+    <WebView
+        android:id="@+id/sm_webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ld_header" />
+        app:layout_constraintTop_toTopOf="@+id/sm_pb" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.blackeyedghoul.firefighters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -13,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -25,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     TextView tempTxt;
     DecimalFormat df = new DecimalFormat("#");
+    MenuItem item1, item2, item3, item4, item5;
     CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8, card_9;
 
     @Override
@@ -48,16 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setBackground(null);
 
-        MenuItem item1 = bottomNavigationView.getMenu().findItem(R.id.alerts);
-        item1.setChecked(false);
-        MenuItem item2 = bottomNavigationView.getMenu().findItem(R.id.news);
-        item2.setChecked(false);
-        MenuItem item3 = bottomNavigationView.getMenu().findItem(R.id.events);
-        item3.setChecked(false);
-        MenuItem item4 = bottomNavigationView.getMenu().findItem(R.id.social_media);
-        item4.setChecked(false);
-        MenuItem item5 = bottomNavigationView.getMenu().findItem(R.id.holder);
-        item5.setChecked(false);
+        clearMenu();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +109,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                item4.setChecked(true);
+                Intent intent = new Intent(MainActivity.this, SocialMedia.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+
         getWeatherDetails();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        clearMenu();
+    }
+
+    private void clearMenu() {
+        item1.setChecked(false);
+        item2.setChecked(false);
+        item3.setChecked(false);
+        item4.setChecked(false);
+        item5.setChecked(false);
     }
 
     private void init() {
@@ -131,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
         card_7 = findViewById(R.id.card_7);
         card_8 = findViewById(R.id.card_8);
         card_9 = findViewById(R.id.card_9);
+        item1 = bottomNavigationView.getMenu().findItem(R.id.alerts);
+        item2 = bottomNavigationView.getMenu().findItem(R.id.news);
+        item3 = bottomNavigationView.getMenu().findItem(R.id.events);
+        item4 = bottomNavigationView.getMenu().findItem(R.id.social_media);
+        item5 = bottomNavigationView.getMenu().findItem(R.id.holder);
     }
 
     private void getWeatherDetails() {

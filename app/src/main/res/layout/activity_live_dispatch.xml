@@ -29,6 +29,9 @@
             android:scaleType="fitXY"
             android:src="@drawable/back"
             app:elevation="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
