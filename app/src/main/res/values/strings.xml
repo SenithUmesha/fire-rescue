@@ -52,4 +52,15 @@
     <string name="cm_commendation_submitted">Your letter has been submitted</string>
     <string name="cm_close">Close</string>
     <string name="sm_title">Social Media</string>
+    <string name="s_stations">Stations</string>
+    <string name="s_list">List</string>
+    <string name="s_map">Map</string>
+    <string name="s_station_name">Station Name</string>
+    <string name="s_phone_number">Station Phone Number</string>
+    <string name="s_station_phone_number">Station Phone Number</string>
+    <string name="s_get_directions">Get Directions</string>
+    <string name="s_alert_total_f_txt">Total Firefighters : 17</string>
+    <string name="s_alert_total_v_txt">Total Vehicles : 4</string>
+    <string name="s_alert_phone_txt">Phone Number : 0114398432</string>
+    <string name="s_alert_address_txt">Address : T.B. Jaya Mawatha, Colombo 10</string>
 </resources>

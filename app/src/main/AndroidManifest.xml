@@ -14,6 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firefighters">
         <activity
+            android:name=".Stations"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SocialMedia"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">

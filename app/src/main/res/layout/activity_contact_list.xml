@@ -52,15 +52,15 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="-5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/back"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
             app:elevation="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/cl_search_view"

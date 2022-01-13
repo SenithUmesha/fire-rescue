@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10sp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/s_station_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/s_station_name"
+                android:textAlignment="center"
+                android:textColor="@color/dark_black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_icon"
+                app:layout_constraintStart_toEndOf="@+id/s_icon"
+                app:layout_constraintTop_toTopOf="@+id/s_icon"
+                app:layout_constraintVertical_bias="0.47" />
+
+            <ImageView
+                android:id="@+id/s_icon"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/station_alt"
+                tools:ignore="ContentDescription"/>
+
+            <TextView
+                android:id="@+id/s_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/product_sans_regular"
+                android:text="@string/s_phone_number"
+                android:textColor="@color/dark_gray"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/s_station_name"
+                app:layout_constraintTop_toBottomOf="@+id/s_station_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

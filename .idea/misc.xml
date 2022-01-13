@@ -6,20 +6,29 @@
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/bg_close.xml" value="0.26615384615384613" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/bg_search_view.xml" value="0.14722222222222223" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/bg_seekbar.xml" value="0.2611111111111111" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/bg_station_details_alert_box.xml" value="0.1388888888888889" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/bg_submit.xml" value="0.26615384615384613" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/custom_thumb.xml" value="0.26615384615384613" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/ripple_round.xml" value="0.2324074074074074" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/ripple_round_10.xml" value="0.26615384615384613" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/ripple_square.xml" value="0.26615384615384613" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/drawable/ripple_square_layout.xml" value="0.2703125" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_commends.xml" value="0.24259259259259258" />
-        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_contact_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_contact_list.xml" value="0.23796296296296296" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_contact_us.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_faqs.xml" value="0.25025641025641027" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_live_dispatch.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_main.xml" value="0.25025641025641027" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_social_media.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_splash_screen.xml" value="0.2101851851851852" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/activity_stations.xml" value="0.23796296296296296" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/contact_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/faq_card.xml" value="0.4833948339483395" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/fragment_station_list.xml" value="0.23333333333333334" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/fragment_station_map.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/station_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/station_details_alert_box.xml" value="0.24814814814814815" />
+        <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/station_row.xml" value="0.22340425531914893" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/layout/success_alert_box.xml" value="0.264" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/menu/bottom_menu.xml" value="0.3300970873786408" />
         <entry key="..\:/Projects/Android_Studio/Firefighters/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2490740740740741" />

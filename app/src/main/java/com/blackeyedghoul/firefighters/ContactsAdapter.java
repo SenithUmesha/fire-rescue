@@ -19,7 +19,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     //final View.OnClickListener onClickListener = new MyOnClickListener();
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView rowId;
         TextView rowName;
         TextView rowPosition;
         TextView rowStation;
@@ -28,7 +27,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            rowId = itemView.findViewById(R.id.cl_id);
             rowName = itemView.findViewById(R.id.cl_name);
             rowPosition = itemView.findViewById(R.id.cl_position);
             rowStation = itemView.findViewById(R.id.cl_station);
@@ -55,7 +53,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ContactsAdapter.ViewHolder viewHolder, int i) {
         Contacts contact = contactsList.get(i);
-        viewHolder.rowId.setText(""+contact.getId());
         viewHolder.rowName.setText(contact.getName());
         viewHolder.rowPosition.setText(contact.getPosition());
         viewHolder.rowStation.setText(contact.getStation());

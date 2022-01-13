@@ -1,24 +1,18 @@
 package com.blackeyedghoul.firefighters;
 
 public class Contacts {
-    private int id;
     private String name;
     private String position;
     private String station;
     private String phone_number;
     private String email;
 
-    public Contacts(int id, String name, String position, String station, String phone_number, String email) {
-        this.id = id;
+    public Contacts(String name, String position, String station, String phone_number, String email) {
         this.name = name;
         this.position = position;
         this.station = station;
         this.phone_number = phone_number;
         this.email = email;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
