@@ -1,11 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:id="@+id/fsm_s_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_red"
     tools:context=".StationMapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <fragment
+        android:id="@+id/fsm_s_map_"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-</FrameLayout>
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
+        android:id="@+id/fsm_s_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:optRoundCardBackgroundColor="@color/white"
+        app:optRoundCardCornerRadius="20sp"
+        app:optRoundCardElevation="16dp"
+        app:optRoundCardLeftTopCorner="false"
+        app:optRoundCardRightTopCorner="false">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="40dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/location" />
+
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+    <TextView
+        android:id="@+id/fsm_s_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/product_sans_bold"
+        android:text="@string/fsm_s_allow_location"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsm_s_card" />
+
+    <TextView
+        android:id="@+id/fsm_s_subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/fsm_s_sub_title"
+        android:textAlignment="center"
+        android:textColor="@color/light_pink"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsm_s_title" />
+
+    <TextView
+        android:id="@+id/fsm_s_allow_access"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_allow_location"
+        android:fontFamily="@font/product_sans_bold"
+        android:foreground="@drawable/ripple_round_20"
+        android:gravity="center"
+        android:text="@string/fsm_s_allow_access_btn"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:elevation="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsm_s_subTitle" />
+
+    <TextView
+        android:id="@+id/fsm_s_allow_access_notNow"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/product_sans_bold"
+        android:foreground="@drawable/ripple_round_20"
+        android:gravity="center"
+        android:text="@string/fsm_s_not_now_btn"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/light_pink"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsm_s_allow_access" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "704740888249",
+    "project_id": "myhealthplusplus",
+    "storage_bucket": "myhealthplusplus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704740888249:android:14eeb68ecc910c57251568",
+        "android_client_info": {
+          "package_name": "com.myhealthplusplus.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704740888249-n889vke0mhap83f0pqc965das9de5b2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myhealthplusplus.app",
+            "certificate_hash": "c5cd36475f8c1b05f1a80c2cd50ca5ca8bfbd1fb"
+          }
+        },
+        {
+          "client_id": "704740888249-s149879l2sqioa0569ibvr8ua5lk55ll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgCV-BeGfGhIcNrchnB6qm0RH4_y_TdIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704740888249-s149879l2sqioa0569ibvr8ua5lk55ll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
