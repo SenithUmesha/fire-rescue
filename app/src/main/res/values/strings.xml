@@ -70,4 +70,5 @@
     <string name="fsm_s_allow_location">Allow Location</string>
     <string name="fsm_s_allow_access_btn">Allow Access</string>
     <string name="fsm_s_not_now_btn">Not Now</string>
+    <string name="fsm_s_search_editText">Enter Address, City or Zip Code</string>
 </resources>
