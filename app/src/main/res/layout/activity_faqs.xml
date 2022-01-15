@@ -17,7 +17,7 @@
         android:paddingLeft="25dp"
         android:paddingTop="20dp"
         android:paddingRight="25dp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,22 +40,22 @@
             android:id="@+id/faq_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginStart="-5dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginStart="-5dp"
             android:scaleType="fitXY"
             android:src="@drawable/back"
             app:elevation="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription,TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <ImageView
             android:layout_width="395dp"
             android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/faq_img"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/tips"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

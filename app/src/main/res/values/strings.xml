@@ -13,7 +13,7 @@
     <string name="btn_4">Fire Safety\nChecklist</string>
     <string name="btn_5">Burn\nPermits</string>
     <string name="btn_6">Request an Appearance</string>
-    <string name="btn_7">FAQ\n</string>
+    <string name="btn_7">Tips\n</string>
     <string name="btn_8">Contact\nUs</string>
     <string name="btn_9">Live Dispatch\nRadio</string>
     <string name="weather">N/C</string>
@@ -38,7 +38,8 @@
     <string name="cu_fax">011-2692222</string>
     <string name="cu_open_map">Open Map</string>
     <string name="cu_emergency">011-2422222\n011-2422223</string>
-    <string name="faq_title">FAQ</string>
+    //faq
+    <string name="faq_title">Tips</string>
     <string name="faq_topic">Topic</string>
     <string name="faq_subtopic">SubTopic</string>
     //commends
@@ -70,5 +71,5 @@
     <string name="fsm_s_allow_location">Allow Location</string>
     <string name="fsm_s_allow_access_btn">Allow Access</string>
     <string name="fsm_s_not_now_btn">Not Now</string>
-    <string name="fsm_s_search_editText">Enter Address, City or Zip Code</string>
+    <string name="fsm_s_search_editText">Enter Address, City</string>
 </resources>

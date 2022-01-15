@@ -15,10 +15,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsetsAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
@@ -26,7 +24,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -34,7 +31,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.github.captain_miao.optroundcardview.OptRoundCardView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -45,6 +41,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -57,7 +54,6 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +68,14 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
     RelativeLayout search;
     ConstraintLayout layout;
     GoogleMap mMap;
-    FloatingActionButton drop, nearby, myLocation, info;
-    Animation open, close, from, to;
+    FloatingActionButton myLocation;
+    Animation open, close;
     private final int GPS_REQUEST_CODE = 9001;
-    LatLngBounds sriLanka_boundary;
+    List<Station> stationsList = new ArrayList<>();
+    DatabaseAdapter databaseAdapter;
     private FusedLocationProviderClient mLocationClient;
     private boolean clicked = false;
+    LatLngBounds sriLanka_boundary;
 
     public StationMapFragment() {
     }
@@ -109,31 +107,14 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
 
         fragmentMap.setVisibility(View.GONE);
         search.setVisibility(View.GONE);
-        drop.setVisibility(View.GONE);
         myLocation.setVisibility(View.GONE);
-        nearby.setVisibility(View.GONE);
-        info.setVisibility(View.GONE);
-
-        drop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setVisibility(clicked);
-                setAnimation(clicked);
-                setClickable(clicked);
-                clicked = !clicked;
-            }
-        });
 
         myLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDeviceLocation();
-                if(clicked) {
-                    setVisibility(true);
-                    setAnimation(clicked);
-                    setClickable(clicked);
-                    clicked = !clicked;
-                }
+                setAnimation(clicked);
+                clicked = !clicked;
+                AnimateToDeviceLocation();
             }
         });
 
@@ -141,34 +122,6 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(mContext, "My Location", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-
-        nearby.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        nearby.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "Nearby Places", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        info.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "More Info", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -191,44 +144,48 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
 
         checkMyPermission();
 
+        PreCreateDB.copyDB(mContext);
+        databaseAdapter = new DatabaseAdapter(mContext);
+        stationsList = databaseAdapter.getAllStations();
+
         return rootView;
     }
 
-    private void setVisibility(boolean clicked) {
-        if (!clicked) {
-            myLocation.setVisibility(View.VISIBLE);
-            nearby.setVisibility(View.VISIBLE);
-            info.setVisibility(View.VISIBLE);
-        } else {
-            myLocation.setVisibility(View.INVISIBLE);
-            nearby.setVisibility(View.INVISIBLE);
-            info.setVisibility(View.INVISIBLE);
+    private void getMarkerData() {
+
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(mContext));
+
+        for (int i = 0; i < stationsList.size(); i++) {
+
+            String name = stationsList.get(i).getName();
+            String address = stationsList.get(i).getAddress();
+            String phone_number = stationsList.get(i).getPhone_number();
+            int t_f = stationsList.get(i).getTotal_fighters();
+            int t_v = stationsList.get(i).getTotal_vehicles();
+            double lat = Double.parseDouble(stationsList.get(i).getLat());
+            double lon = Double.parseDouble(stationsList.get(i).getLon());
+
+            LatLng latLng = new LatLng(lat, lon);
+
+            customMarker(latLng, name, address, phone_number, t_f, t_v);
         }
+    }
+
+    private void customMarker(LatLng latLng, String title, String address, String phone_number, int t_fighters, int t_vehicles) {
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .title(title)
+                .snippet("Address: " + address + "\nPhone Number: " + phone_number + "\nTotal Firefighters: " + t_fighters + "\nTotal Vehicles: " + t_vehicles)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.station_50));
+
+        mMap.addMarker(options);
     }
 
     private void setAnimation(boolean clicked) {
         if (!clicked) {
-            drop.startAnimation(open);
-            myLocation.startAnimation(from);
-            nearby.startAnimation(from);
-            info.startAnimation(from);
+            myLocation.startAnimation(open);
         } else {
-            drop.startAnimation(close);
-            myLocation.startAnimation(to);
-            nearby.startAnimation(to);
-            info.startAnimation(to);
-        }
-    }
-
-    private void setClickable(boolean clicked) {
-        if (!clicked) {
-            myLocation.setClickable(true);
-            nearby.setClickable(true);
-            info.setClickable(true);
-        } else {
-            myLocation.setClickable(false);
-            nearby.setClickable(false);
-            info.setClickable(false);
+            myLocation.startAnimation(close);
         }
     }
 
@@ -249,7 +206,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         });
     }
 
-    private void getDeviceLocation() {
+    private void AnimateToDeviceLocation() {
         mLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
 
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -286,7 +243,12 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
             Address address = list.get(0);
             Log.d("fms", "geoLocate " + address.toString());
 
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f, address.getAddressLine(0));
+            if (address.getCountryCode().equals("LK")) {
+                moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f, address.getAddressLine(0));
+            }
+            else {
+                Toast.makeText(mContext, "Not found within LK", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
@@ -308,13 +270,16 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         }
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
-        //mMap.setLatLngBoundsForCameraTarget(sriLanka_boundary);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setCompassEnabled(false);
+        mMap.setLatLngBoundsForCameraTarget(sriLanka_boundary);
         mMap.setMinZoomPreference(7.7f);
-        LatLng latLng = new LatLng(7.806167305163772, 80.68711340720736);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 7);
+        LatLng latLng = new LatLng(6.898410441777559, 79.87451160758005);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
         mMap.moveCamera(cameraUpdate);
 
         init_search();
+        getMarkerData();
     }
 
     @Override
@@ -343,13 +308,8 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         search = rootView.findViewById(R.id.fsm_s_search_layout);
         searchText = rootView.findViewById(R.id.fsm_s_search_editText);
         myLocation = rootView.findViewById(R.id.fsm_s_floatingActionButton_my_location);
-        nearby = rootView.findViewById(R.id.fsm_s_floatingActionButton_nearby);
-        drop = rootView.findViewById(R.id.fsm_s_floatingActionButton_drop);
-        info = rootView.findViewById(R.id.fsm_s_floatingActionButton_info);
         open = AnimationUtils.loadAnimation(mContext, R.anim.rotate_open_anim);
         close = AnimationUtils.loadAnimation(mContext, R.anim.rotate_close_anim);
-        from = AnimationUtils.loadAnimation(mContext, R.anim.from_button_anim);
-        to = AnimationUtils.loadAnimation(mContext, R.anim.to_button_anim);
     }
 
     private void checkMyPermission() {
@@ -366,10 +326,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
                 layout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 fragmentMap.setVisibility(View.VISIBLE);
                 search.setVisibility(View.VISIBLE);
-                drop.setVisibility(View.VISIBLE);
-                myLocation.setVisibility(View.INVISIBLE);
-                nearby.setVisibility(View.INVISIBLE);
-                info.setVisibility(View.INVISIBLE);
+                myLocation.setVisibility(View.VISIBLE);
                 initMap();
                 mLocationClient = new FusedLocationProviderClient(mContext);
             }
@@ -441,9 +398,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fsm_s_layout, frag).commit();
             } else {
-                Intent intent = new Intent(mContext, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                isGPSEnable();
             }
         }
     }
