@@ -13,6 +13,7 @@ public class DatabaseAdapter {
     SQLiteDatabase db;
     List<Contacts> contactsList = new ArrayList<>();
     List<Station> stationsList = new ArrayList<>();
+    List<Tip> tipsList = new ArrayList<>();
 
     public DatabaseAdapter(Context context) {
         helper = new DatabaseHelper(context);
@@ -67,11 +68,28 @@ public class DatabaseAdapter {
         return stationsList;
     }
 
+    public List<Tip> getAllTips() {
+        String[] columns = {DatabaseHelper.KEY_TIP_TOPIC, DatabaseHelper.KEY_TIP_SUB_TOPIC};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME3, columns, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            int index2 = cursor.getColumnIndex(DatabaseHelper.KEY_TIP_TOPIC);
+            String topic = cursor.getString(index2);
+            int index3 = cursor.getColumnIndex(DatabaseHelper.KEY_TIP_SUB_TOPIC);
+            String sub_topic = cursor.getString(index3);
+
+            Tip tip = new Tip(topic, sub_topic);
+            tipsList.add(tip);
+        }
+        return tipsList;
+    }
+
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
         private static final String DATABASE_NAME = "Firefighters.db";
         private static final String TABLE_NAME1 = "contact_list";
         private static final String TABLE_NAME2 = "station_list";
+        private static final String TABLE_NAME3 = "tips";
 
         private static final int DATABASE_VERSION = 2;
 
@@ -88,6 +106,9 @@ public class DatabaseAdapter {
         private static final String KEY_S_TOTAL_VEHICLES = "total_vehicles";
         private static final String KEY_S_LAT = "lat";
         private static final String KEY_S_LON = "long";
+
+        private static final String KEY_TIP_TOPIC = "tip_topic";
+        private static final String KEY_TIP_SUB_TOPIC = "tip_sub_topic";
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
