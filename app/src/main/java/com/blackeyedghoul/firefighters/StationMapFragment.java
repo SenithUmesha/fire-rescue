@@ -244,7 +244,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
             Log.d("fms", "geoLocate " + address.toString());
 
             if (address.getCountryCode().equals("LK")) {
-                moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f, address.getAddressLine(0));
+                moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f, address.getAddressLine(0), address.getAdminArea());
             }
             else {
                 Toast.makeText(mContext, "Not found within LK", Toast.LENGTH_SHORT).show();
@@ -253,12 +253,13 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom, String title) {
+    private void moveCamera(LatLng latLng, float zoom, String title, String admin) {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
-                .title(title);
+                .title(title)
+                .snippet(admin);
         mMap.addMarker(options);
     }
 

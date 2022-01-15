@@ -10,13 +10,13 @@
     <string name="btn_1">Stations\n</string>
     <string name="btn_2">Commend a Firefighter</string>
     <string name="btn_3">Contact\nDirectory</string>
-    <string name="btn_4">Fire Safety\nChecklist</string>
-    <string name="btn_5">Burn\nPermits</string>
-    <string name="btn_6">Request an Appearance</string>
+    <string name="btn_4">Fire Investigation\nChecklist</string>
+    <string name="btn_5">Witness\nStatements</string>
+    <string name="btn_6">QR\nScanner</string>
     <string name="btn_7">Tips\n</string>
     <string name="btn_8">Contact\nUs</string>
     <string name="btn_9">Live Dispatch\nRadio</string>
-    <string name="weather">N/C</string>
+    <string name="weather">N/A</string>
     //live_dispatch
     <string name="ld_title">Live Dispatch Radio</string>
     <string name="ld_subTitle">This feed is being provided by Colombo Fire Brigade, located in WP. The feed will provide a cycle of dispatch and tac channels for Fire and EMS only.</string>
@@ -52,6 +52,7 @@
     <string name="cm_success">Success</string>
     <string name="cm_commendation_submitted">Your letter has been submitted</string>
     <string name="cm_close">Close</string>
+    //social_media
     <string name="sm_title">Social Media</string>
     //stations_list_fragment
     <string name="s_stations">Stations</string>
@@ -61,10 +62,10 @@
     <string name="s_phone_number">Station Phone Number</string>
     <string name="s_station_phone_number">Station Phone Number</string>
     <string name="s_get_directions">Get Directions</string>
-    <string name="s_alert_total_f_txt">Total Firefighters : 17</string>
-    <string name="s_alert_total_v_txt">Total Vehicles : 4</string>
-    <string name="s_alert_phone_txt">Phone Number : 0114398432</string>
-    <string name="s_alert_address_txt">Address : T.B. Jaya Mawatha, Colombo 10</string>
+    <string name="s_alert_total_f_txt">Total Firefighters : N/A</string>
+    <string name="s_alert_total_v_txt">Total Vehicles : N/A</string>
+    <string name="s_alert_phone_txt">Phone Number : N/A</string>
+    <string name="s_alert_address_txt">Address : N/A</string>
     //stations_map_fragment
     <string name="google_maps_api_key">AIzaSyBoFTJSHdg8NYoXZ5ij02g-jaNV_INQzIg</string>
     <string name="fsm_s_sub_title">We will need these permissions to give you a better user experience.</string>

@@ -428,7 +428,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="19dp"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/checklist"
+                                    android:src="@drawable/check"
                                     tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
@@ -492,7 +492,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="15dp"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/fire"
+                                    android:src="@drawable/witness"
                                     tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
@@ -557,7 +557,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="15dp"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/firetruck"
+                                    android:src="@drawable/qr"
                                     tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
