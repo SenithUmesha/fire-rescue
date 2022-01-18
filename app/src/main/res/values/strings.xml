@@ -83,4 +83,10 @@
     <string name="ew_event_ending_time">23:00</string>
     <string name="ew_event_location">Event Location</string>
     <string name="ew_date_and_month">16, January</string>
+    //notifications
+    <string name="n_title">Alerts</string>
+    <string name="n_all">All</string>
+    <string name="n_notification_title">Notification Title</string>
+    <string name="n_notification_body">Notification Body</string>
+    <string name="n_notification_time">Time</string>
 </resources>

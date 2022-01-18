@@ -16,6 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firefighters">
         <activity
+            android:name=".Notifications"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Events"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
@@ -23,6 +31,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBoFTJSHdg8NYoXZ5ij02g-jaNV_INQzIg" />
@@ -109,7 +118,7 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

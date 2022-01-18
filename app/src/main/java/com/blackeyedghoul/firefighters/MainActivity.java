@@ -117,6 +117,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                item1.setChecked(true);
+                Intent intent = new Intent(MainActivity.this, Notifications.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
