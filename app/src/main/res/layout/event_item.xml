@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="13dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/ew_event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/ew_event_location"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ew_location_icon"
+            app:layout_constraintTop_toBottomOf="@+id/ew_event_starting_time" />
+
+        <ImageView
+            android:id="@+id/ew_location_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cm_green_dash"
+            app:layout_constraintTop_toBottomOf="@+id/ew_time_icon"
+            app:srcCompat="@drawable/location_50_gray"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/ew_dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/ew_dash"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/ew_event_starting_time"
+            app:layout_constraintTop_toBottomOf="@+id/ew_event_name" />
+
+        <View
+            android:id="@+id/cm_green_dash"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:background="@color/dark_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ew_event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/ew_event_name"
+            android:textAlignment="textStart"
+            android:textColor="@color/dark_black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/cm_green_dash"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ew_time_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@+id/cm_green_dash"
+            app:layout_constraintTop_toBottomOf="@+id/ew_event_name"
+            app:srcCompat="@drawable/clock_50_gray"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/ew_event_starting_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/ew_event_starting_time"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/ew_time_icon"
+            app:layout_constraintTop_toBottomOf="@+id/ew_event_name" />
+
+        <TextView
+            android:id="@+id/ew_event_ending_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/ew_event_ending_time"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/ew_dash"
+            app:layout_constraintTop_toBottomOf="@+id/ew_event_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

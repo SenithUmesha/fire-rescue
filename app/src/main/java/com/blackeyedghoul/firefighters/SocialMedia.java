@@ -2,12 +2,15 @@ package com.blackeyedghoul.firefighters;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ public class SocialMedia extends AppCompatActivity {
     WebView webView;
     ProgressBar progressBar;
     ImageView back;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -36,13 +40,15 @@ public class SocialMedia extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-
                 progressBar.setVisibility(view.VISIBLE);
+                int refreshCycleColor = getResources().getColor(R.color.dark_red);
+                swipeRefreshLayout.setColorSchemeColors(refreshCycleColor);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                swipeRefreshLayout.setRefreshing(false);
 
                 progressBar.setVisibility(View.GONE);
             }
@@ -50,6 +56,13 @@ public class SocialMedia extends AppCompatActivity {
         registerForContextMenu(webView);
 
         webView.loadUrl("https://www.facebook.com/colombofirebrigade");
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                webView.reload();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +76,7 @@ public class SocialMedia extends AppCompatActivity {
         webView = findViewById(R.id.sm_webView);
         progressBar = findViewById(R.id.sm_pb);
         back = findViewById(R.id.sm_back);
+        swipeRefreshLayout = findViewById(R.id.sm_swipeContainer);
     }
 
     @Override

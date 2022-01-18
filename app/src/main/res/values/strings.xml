@@ -73,4 +73,14 @@
     <string name="fsm_s_allow_access_btn">Allow Access</string>
     <string name="fsm_s_not_now_btn">Not Now</string>
     <string name="fsm_s_search_editText">Enter Address, City</string>
+    //events
+    <string name="ew_all_plans">Upcoming</string>
+    <string name="ew_title">Events</string>
+    <string name="ew_month">January 2022</string>
+    <string name="ew_event_name">Event Name</string>
+    <string name="ew_event_starting_time">20:00</string>
+    <string name="ew_dash">-</string>
+    <string name="ew_event_ending_time">23:00</string>
+    <string name="ew_event_location">Event Location</string>
+    <string name="ew_date_and_month">16, January</string>
 </resources>
