@@ -50,8 +50,10 @@
     <string name="cm_feedback_hint">Tell us about your experience</string>
     <string name="cm_submit">Submit</string>
     <string name="cm_success">Success</string>
-    <string name="cm_commendation_submitted">Your letter has been submitted</string>
+    <string name="cm_commendation_submitted">Your letter has been submitted.</string>
     <string name="cm_close">Close</string>
+    <string name="cm_fail">Fail</string>
+    <string name="cm_commendation_fail">Letter submission failed.</string>
     //social_media
     <string name="sm_title">Social Media</string>
     //stations_list_fragment
@@ -89,4 +91,7 @@
     <string name="n_notification_title">Notification Title</string>
     <string name="n_notification_body">Notification Body</string>
     <string name="n_notification_time">Time</string>
+    <string name="n_alert_time">Date : N/A</string>
+    <string name="n_alert_title">Title : N/A</string>
+    <string name="n_alert_body">Body : N/A</string>
 </resources>

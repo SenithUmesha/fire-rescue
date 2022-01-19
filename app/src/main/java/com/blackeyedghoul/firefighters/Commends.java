@@ -1,12 +1,9 @@
 package com.blackeyedghoul.firefighters;
 
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -56,24 +52,30 @@ public class Commends extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(feedback.getText().toString())) {
                     feedback.setError("Field can not be empty");
                 } else {
+
                     name.setError(null);
                     feedback.setError(null);
 
-                    Thread thread = new Thread(new Runnable() {
+                    if (MainActivity.isConnected(Commends.this)) {
 
-                        @Override
-                        public void run() {
-                            try {
-                                sendMail();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        Thread thread = new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                try {
+                                    sendMail();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    thread.start();
+                        thread.start();
 
-                    runAlert();
+                        runAlertSuccess();
+                    } else {
+                        runAlertFail();
+                    }
 
                     name.getText().clear();
                     feedback.getText().clear();
@@ -92,7 +94,7 @@ public class Commends extends AppCompatActivity {
         });
     }
 
-    private void runAlert() {
+    private void runAlertSuccess() {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 Commends.this, R.style.BottomSheetDialogTheme
@@ -149,8 +151,33 @@ public class Commends extends AppCompatActivity {
             Transport.send(message);
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+    }
+
+    private void runAlertFail() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                Commends.this, R.style.BottomSheetDialogTheme
+        );
+        View bottomSheetView = LayoutInflater.from(getApplicationContext())
+                .inflate(
+                        R.layout.fail_alert_box,
+                        findViewById(R.id.cm_fail_alert_box)
+                );
+
+        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(back, 20);
+        bottomSheetDialog.getWindow().setBackgroundDrawable(inset);
+
+        bottomSheetView.findViewById(R.id.cm_close_fail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        bottomSheetDialog.setCancelable(true);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
     }
 
     private void init() {

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firefighters">
         <activity
+            android:name=".QRScanner"
+            android:exported="true" />
+        <activity
             android:name=".Notifications"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
@@ -113,6 +116,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".PushNotificationService"
             android:enabled="true"

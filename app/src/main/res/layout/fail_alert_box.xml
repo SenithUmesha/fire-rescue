@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cm_success_alert_box"
+    android:id="@+id/cm_fail_alert_box"
     android:background="@color/white"
     android:layout_gravity="center"
     app:cardCornerRadius="10dp"
@@ -17,56 +17,56 @@
         android:background="@color/white">
 
         <View
-            android:id="@+id/cm_green_dash"
+            android:id="@+id/cm_red_dash"
             android:layout_width="10dp"
             android:layout_height="0dp"
-            android:background="@color/dark_green"
+            android:background="@color/dark_red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/cm_ok"
+            android:id="@+id/cm_cancel"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cm_green_dash"
-            app:layout_constraintStart_toEndOf="@+id/cm_green_dash"
-            app:layout_constraintTop_toTopOf="@+id/cm_green_dash"
-            android:background="@drawable/ok"
+            app:layout_constraintBottom_toBottomOf="@+id/cm_red_dash"
+            app:layout_constraintStart_toEndOf="@+id/cm_red_dash"
+            app:layout_constraintTop_toTopOf="@+id/cm_red_dash"
+            android:background="@drawable/cancel"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/cm_success"
+            android:id="@+id/cm_fail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/product_sans_bold"
-            android:text="@string/cm_success"
+            android:text="@string/cm_fail"
             android:textAlignment="center"
             android:textColor="@color/dark_black"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/cm_ok"
-            app:layout_constraintStart_toEndOf="@+id/cm_ok"
-            app:layout_constraintTop_toTopOf="@+id/cm_ok" />
+            app:layout_constraintBottom_toBottomOf="@+id/cm_cancel"
+            app:layout_constraintStart_toEndOf="@+id/cm_cancel"
+            app:layout_constraintTop_toTopOf="@+id/cm_cancel" />
 
         <TextView
-            android:id="@+id/cm_success_subT"
+            android:id="@+id/cm_fail_subT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/product_sans_regular"
-            android:text="@string/cm_commendation_submitted"
+            android:text="@string/cm_commendation_fail"
             android:textAlignment="center"
             android:textColor="@color/gray"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/cm_ok"
-            app:layout_constraintStart_toEndOf="@+id/cm_ok"
-            app:layout_constraintTop_toBottomOf="@+id/cm_success" />
+            app:layout_constraintBottom_toBottomOf="@+id/cm_cancel"
+            app:layout_constraintStart_toEndOf="@+id/cm_cancel"
+            app:layout_constraintTop_toBottomOf="@+id/cm_fail" />
 
         <LinearLayout
-            android:id="@+id/cm_close"
+            android:id="@+id/cm_close_fail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"

@@ -4,6 +4,9 @@ public class Notification {
 
     String title, body, date;
 
+    public Notification() {
+    }
+
     public Notification(String title, String body, String date) {
         this.title = title;
         this.body = body;

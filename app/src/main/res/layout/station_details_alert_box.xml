@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.captain_miao.optroundcardview.OptRoundCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:id="@+id/s_alert_box"
     app:cardElevation="16dp"
+    app:optRoundCardRightBottomCorner="false"
+    app:optRoundCardLeftBottomCorner="false"
+    app:optRoundCardCornerRadius="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:backgroundTint="@color/white" >
 
         <TextView
             android:id="@+id/s_alert_total_v_txt"
@@ -201,4 +205,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.github.captain_miao.optroundcardview.OptRoundCardView>
