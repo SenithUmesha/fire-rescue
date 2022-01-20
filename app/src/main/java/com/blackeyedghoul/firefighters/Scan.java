@@ -7,6 +7,11 @@ public class Scan {
     public Scan() {
     }
 
+    public Scan(String data, String time) {
+        this.data = data;
+        this.time = time;
+    }
+
     public String getData() {
         return data;
     }
