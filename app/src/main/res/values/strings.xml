@@ -94,4 +94,13 @@
     <string name="n_alert_time">Date : N/A</string>
     <string name="n_alert_title">Title : N/A</string>
     <string name="n_alert_body">Body : N/A</string>
+    //qr_scanner
+    <string name="qr_title">QR Scanner</string>
+    <string name="qrh_history">History</string>
+    <string name="qrh_help">Place the QR code or the barcode inside\nthe area</string>
+    <string name="qrh_help2">Scanning will start automatically</string>
+    <string name="qr_result_title">Results!</string>
+    <string name="qr_result_n_a">N/A</string>
+    <string name="qr_result_contents_text">Contents:</string>
+    <string name="qr_result_open">Open</string>
 </resources>
