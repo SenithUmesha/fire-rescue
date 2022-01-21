@@ -10,7 +10,7 @@
     <string name="btn_1">Stations\n</string>
     <string name="btn_2">Commend a Firefighter</string>
     <string name="btn_3">Contact\nDirectory</string>
-    <string name="btn_4">Fire Investigation\nChecklist</string>
+    <string name="btn_4">Careers\n</string>
     <string name="btn_5">Witness\nStatements</string>
     <string name="btn_6">QR\nScanner</string>
     <string name="btn_7">Tips\n</string>
@@ -103,4 +103,20 @@
     <string name="qr_result_n_a">N/A</string>
     <string name="qr_result_contents_text">Contents:</string>
     <string name="qr_result_open">Open</string>
+    <string name="c_recent_jobs">Recent Jobs</string>
+    <string name="c_careers">Careers</string>
+    <string name="c_card_work_time">Full Time</string>
+    <string name="c_card_location">HQ</string>
+    <string name="c_card_name">Firefighter</string>
+    <string name="cd_salary">$40,000/year</string>
+    <string name="cd_date">Jan 11, 2022</string>
+    <string name="cd_description_title">Description</string>
+    <string name="cd_description">The Firefighter has responsibility to ensure his/her assigned apparatus, equipment and facilities are maintained in appropriate readiness to respond to a variety of life saving emergency calls. The Firefighter is primarily responsible for performing difficult and lifesaving work at emergency scenes including fire suppression, rescue, and emergency medical care and general preparatory work at the fire station, checking equipment for proper operation and general condition, and performing and assisting with routine maintenance of apparatus and equipment.</string>
+    <string name="cd_req_title">Requirements</string>
+    <string name="cd_age_title">Age:</string>
+    <string name="cd_age">18+</string>
+    <string name="cd_education_title">Education:</string>
+    <string name="cd_location">HQ</string>
+    <string name="cd_education"><![CDATA[Certified Firefighter through TCFP & Certified or licensed Paramedic through TDSHS or National registry at time of written examination.]]></string>
+    <string name="cd_apply_now">Apply Now</string>
 </resources>

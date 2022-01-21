@@ -428,7 +428,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="19dp"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/check"
+                                    android:src="@drawable/careers"
                                     tools:ignore="ContentDescription" />
 
                             </androidx.cardview.widget.CardView>
