@@ -103,11 +103,13 @@
     <string name="qr_result_n_a">N/A</string>
     <string name="qr_result_contents_text">Contents:</string>
     <string name="qr_result_open">Open</string>
-    <string name="c_recent_jobs">Recent Jobs</string>
+    //careers
+    <string name="c_recent_jobs">Available Positions</string>
     <string name="c_careers">Careers</string>
     <string name="c_card_work_time">Full Time</string>
     <string name="c_card_location">HQ</string>
     <string name="c_card_name">Firefighter</string>
+    //career_details
     <string name="cd_salary">$40,000/year</string>
     <string name="cd_date">Jan 11, 2022</string>
     <string name="cd_description_title">Description</string>
@@ -119,4 +121,13 @@
     <string name="cd_location">HQ</string>
     <string name="cd_education"><![CDATA[Certified Firefighter through TCFP & Certified or licensed Paramedic through TDSHS or National registry at time of written examination.]]></string>
     <string name="cd_apply_now">Apply Now</string>
+    <string name="ws_title">Witness Statements</string>
+    <string name="ws_dob">D.O.B</string>
+    <string name="ws_date">Date</string>
+    <string name="ws_time">Time</string>
+    <string name="ws_enter_additional_notes">Additional notes</string>
+    <string name="ws_officer_signature">Officer signature</string>
+    <string name="ws_witness_signature">Witness signature</string>
+    <string name="ws_email">Email</string>
+    <string name="ws_email_to_get_a_copy">Email to get a copy</string>
 </resources>

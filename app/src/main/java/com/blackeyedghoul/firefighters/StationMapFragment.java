@@ -68,14 +68,15 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
     RelativeLayout search;
     ConstraintLayout layout;
     GoogleMap mMap;
-    FloatingActionButton myLocation;
+    FloatingActionButton clearMarkers, myLocation, drop;
     Animation open, close;
     private final int GPS_REQUEST_CODE = 9001;
     List<Station> stationsList = new ArrayList<>();
     DatabaseAdapter databaseAdapter;
     private FusedLocationProviderClient mLocationClient;
-    private boolean clicked = false;
+    Boolean isAllFabsVisible;
     LatLngBounds sriLanka_boundary;
+    int marker_count = 0;
 
     public StationMapFragment() {
     }
@@ -107,13 +108,40 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
 
         fragmentMap.setVisibility(View.GONE);
         search.setVisibility(View.GONE);
+        drop.setVisibility(View.GONE);
         myLocation.setVisibility(View.GONE);
+        clearMarkers.setVisibility(View.GONE);
+
+        drop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isAllFabsVisible) {
+                    myLocation.setVisibility(View.VISIBLE);
+                    clearMarkers.setVisibility(View.VISIBLE);
+                    myLocation.setClickable(true);
+                    clearMarkers.setClickable(true);
+                    drop.startAnimation(open);
+                    isAllFabsVisible = true;
+                } else {
+                    myLocation.setVisibility(View.GONE);
+                    clearMarkers.setVisibility(View.GONE);
+                    myLocation.setClickable(false);
+                    clearMarkers.setClickable(false);
+                    drop.startAnimation(close);
+                    isAllFabsVisible = false;
+                }
+            }
+        });
 
         myLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAnimation(clicked);
-                clicked = !clicked;
+                myLocation.setVisibility(View.GONE);
+                clearMarkers.setVisibility(View.GONE);
+                myLocation.setClickable(false);
+                clearMarkers.setClickable(false);
+                drop.startAnimation(close);
+                isAllFabsVisible = false;
                 AnimateToDeviceLocation();
             }
         });
@@ -122,6 +150,33 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(mContext, "My Location", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        clearMarkers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myLocation.setVisibility(View.GONE);
+                clearMarkers.setVisibility(View.GONE);
+                myLocation.setClickable(false);
+                clearMarkers.setClickable(false);
+                drop.startAnimation(close);
+                isAllFabsVisible = false;
+                if (marker_count >= 1) {
+                    mMap.clear();
+                    Toast.makeText(mContext, "Cleared", Toast.LENGTH_SHORT).show();
+                    getMarkerData();
+                } else {
+                    Toast.makeText(mContext, "No markers on map", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        clearMarkers.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(mContext, "Clear Markers", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -181,14 +236,6 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         mMap.addMarker(options);
     }
 
-    private void setAnimation(boolean clicked) {
-        if (!clicked) {
-            myLocation.startAnimation(open);
-        } else {
-            myLocation.startAnimation(close);
-        }
-    }
-
     private void init_search() {
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -220,8 +267,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
                     Location currentLocation = (Location) task.getResult();
                     LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
-                }
-                else {
+                } else {
                     Toast.makeText(mContext, "Unable to get current location.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -245,11 +291,12 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
 
             if (address.getCountryCode().equals("LK")) {
                 moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f, address.getAddressLine(0), address.getAdminArea());
-            }
-            else {
-                Toast.makeText(mContext, "Not found within LK", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, "The location you were looking for doesn't exist within Sri Lanka", Toast.LENGTH_SHORT).show();
             }
 
+        } else if (list.size() == 0) {
+            Toast.makeText(mContext, "The location you were looking for doesn't exist.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -261,6 +308,7 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
                 .title(title)
                 .snippet(admin);
         mMap.addMarker(options);
+        marker_count++;
     }
 
     @Override
@@ -309,6 +357,8 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
         search = rootView.findViewById(R.id.fsm_s_search_layout);
         searchText = rootView.findViewById(R.id.fsm_s_search_editText);
         myLocation = rootView.findViewById(R.id.fsm_s_floatingActionButton_my_location);
+        drop = rootView.findViewById(R.id.fsm_s_floatingActionButton_drop);
+        clearMarkers = rootView.findViewById(R.id.fsm_s_floatingActionButton_clear);
         open = AnimationUtils.loadAnimation(mContext, R.anim.rotate_open_anim);
         close = AnimationUtils.loadAnimation(mContext, R.anim.rotate_close_anim);
     }
@@ -327,7 +377,8 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback, 
                 layout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 fragmentMap.setVisibility(View.VISIBLE);
                 search.setVisibility(View.VISIBLE);
-                myLocation.setVisibility(View.VISIBLE);
+                drop.setVisibility(View.VISIBLE);
+                isAllFabsVisible = false;
                 initMap();
                 mLocationClient = new FusedLocationProviderClient(mContext);
             }

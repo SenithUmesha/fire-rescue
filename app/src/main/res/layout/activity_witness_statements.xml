@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".WitnessStatements">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ws_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_red"
+        android:elevation="20dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="20dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ws_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/ws_title"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ws_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="-5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
+            app:elevation="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ws_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/ws_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/bg_submit"
+                android:elevation="16dp"
+                android:fontFamily="@font/product_sans_regular"
+                android:foreground="@drawable/ripple_round_10"
+                android:text="@string/cm_submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_copy_email_card"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_copy_email_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_o_sig_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/ws_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/ws_email"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/ws_divider6"
+                        android:layout_width="1dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray" />
+
+                    <EditText
+                        android:id="@+id/ws_email_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:hint="@string/ws_email_to_get_a_copy"
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        android:maxEms="40"
+                        android:singleLine="true"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="DuplicateSpeakableTextCheck,SpeakableTextPresentCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_o_sig_card"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_ad_notes_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <EditText
+                        android:id="@+id/ws_o_sig_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:gravity="center"
+                        android:hint="@string/ws_officer_signature"
+                        android:importantForAutofill="no"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_w_sig_card"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_ad_notes_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <EditText
+                        android:id="@+id/ws_w_sig_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:gravity="center"
+                        android:hint="@string/ws_witness_signature"
+                        android:importantForAutofill="no"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_date_card"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_dob_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <EditText
+                        android:id="@+id/ws_date_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:gravity="center"
+                        android:hint="@string/ws_date"
+                        android:importantForAutofill="no"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_ad_notes_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_date_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/ws_ad_notes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/ws_enter_additional_notes"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/ws_divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/gray" />
+
+                    <EditText
+                        android:id="@+id/ws_ad_notes_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:background="@null"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:gravity="top"
+                        android:hint="@string/ws_enter_additional_notes"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_time_card"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_dob_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <EditText
+                        android:id="@+id/ws_time_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:gravity="center"
+                        android:hint="@string/ws_time"
+                        android:importantForAutofill="no"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_dob_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ws_name_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/ws_dob"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/ws_dob"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/ws_divider2"
+                        android:layout_width="1dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray" />
+
+                    <EditText
+                        android:id="@+id/ws_dob_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:hint="@string/ws_dob"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxEms="40"
+                        android:singleLine="true"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ws_name_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/ws_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/cm_name"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/ws_divider1"
+                        android:layout_width="1dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray" />
+
+                    <EditText
+                        android:id="@+id/ws_name_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:hint="@string/cm_name"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:maxEms="40"
+                        android:singleLine="true"
+                        android:textColor="@color/dark_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="18sp"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

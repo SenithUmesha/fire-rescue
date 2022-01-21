@@ -102,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        card_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WitnessStatements.class);
+                startActivity(intent);
+            }
+        });
+
         card_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
