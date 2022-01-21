@@ -1,28 +1,37 @@
 package com.blackeyedghoul.firefighters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LiveDispatch extends AppCompatActivity {
 
+    String updatedStatus, updatedUrl;
     ImageView play, pause, back;
     SeekBar volumeBar;
     LottieAnimationView ripple;
     AudioManager audioManager;
     TextView feedStatus;
-    String url = "https://listen.broadcastify.com/b5gmp9fc206tyzd.mp3?nc=43859&xan=xtf9912b41c";
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +44,10 @@ public class LiveDispatch extends AppCompatActivity {
         pause.setVisibility(View.GONE);
         MediaPlayer mp = new MediaPlayer();
 
+        setUrlAndStatus();
+
         play.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 play.setVisibility(View.GONE);
@@ -47,13 +59,13 @@ public class LiveDispatch extends AppCompatActivity {
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                 try {
-                    mp.setDataSource(url);
+                    mp.setDataSource(updatedUrl);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 try {
-                    feedStatus.setText(R.string.ld_feed_status_online);
+                    feedStatus.setText("Feed Status : " + updatedStatus);
                     mp.prepare();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -111,6 +123,31 @@ public class LiveDispatch extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setUrlAndStatus() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("live_dispatch");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                updatedUrl = snapshot
+                        .child("url")
+                        .getValue().toString();
+
+                updatedStatus = snapshot
+                        .child("status")
+                        .getValue().toString();
+
+                Log.d("hello", "url: "+updatedUrl+" status: "+updatedStatus);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
