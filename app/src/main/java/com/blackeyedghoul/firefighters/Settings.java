@@ -54,8 +54,7 @@ public class Settings extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) { }
             });
 
         } else {
@@ -92,6 +91,13 @@ public class Settings extends AppCompatActivity {
                 Uri uri = Uri.fromParts("package", Settings.this.getPackageName(), "");
                 intent.setData(uri);
                 startActivity(intent);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

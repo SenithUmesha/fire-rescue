@@ -29,6 +29,7 @@ public class PreCreateDB {
         while((length = inputStream.read(buffer)) > 0){
             outputStream.write(buffer, 0, length);
         }
+        outputStream.flush();
         inputStream.close();
         outputStream.close();
     }

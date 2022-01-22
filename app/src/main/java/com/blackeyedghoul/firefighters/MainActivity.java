@@ -1,6 +1,5 @@
 package com.blackeyedghoul.firefighters;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,13 +26,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DecimalFormat;
@@ -74,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 fab.startAnimation(animation);
 
                 if (view.getId() == R.id.fab) {
-                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             }
         });
@@ -90,8 +85,13 @@ public class MainActivity extends AppCompatActivity {
         card_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Stations.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    Intent intent = new Intent(MainActivity.this, Stations.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -114,8 +114,13 @@ public class MainActivity extends AppCompatActivity {
         card_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Careers.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    Intent intent = new Intent(MainActivity.this, Careers.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -130,8 +135,13 @@ public class MainActivity extends AppCompatActivity {
         card_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, QRScannerHome.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    Intent intent = new Intent(MainActivity.this, QRScannerHome.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -154,17 +164,27 @@ public class MainActivity extends AppCompatActivity {
         card_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                item1.setChecked(true);
-                Intent intent = new Intent(MainActivity.this, Notifications.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    item1.setChecked(true);
+                    Intent intent = new Intent(MainActivity.this, Notifications.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });
@@ -172,9 +192,14 @@ public class MainActivity extends AppCompatActivity {
         item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                item2.setChecked(true);
-                Intent intent = new Intent(MainActivity.this, News.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    item2.setChecked(true);
+                    Intent intent = new Intent(MainActivity.this, News.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });
@@ -182,9 +207,14 @@ public class MainActivity extends AppCompatActivity {
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                item3.setChecked(true);
-                Intent intent = new Intent(MainActivity.this, Events.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    item3.setChecked(true);
+                    Intent intent = new Intent(MainActivity.this, Events.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });
@@ -192,9 +222,14 @@ public class MainActivity extends AppCompatActivity {
         item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                item4.setChecked(true);
-                Intent intent = new Intent(MainActivity.this, SocialMedia.class);
-                startActivity(intent);
+
+                if (isConnected(MainActivity.this)) {
+                    item4.setChecked(true);
+                    Intent intent = new Intent(MainActivity.this, SocialMedia.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });

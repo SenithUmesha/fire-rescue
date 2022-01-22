@@ -3,7 +3,9 @@ package com.blackeyedghoul.firefighters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class DatabaseAdapter {
 
     public DatabaseAdapter(Context context) {
         helper = new DatabaseHelper(context);
-        db = helper.getWritableDatabase();
+        db = helper.getReadableDatabase();
     }
 
     public List<Contacts> getAllContacts() {
@@ -39,6 +41,8 @@ public class DatabaseAdapter {
             Contacts contact = new Contacts(name, position, station, phone_number, email);
             contactsList.add(contact);
         }
+
+        cursor.close();
         return contactsList;
     }
 
@@ -65,6 +69,7 @@ public class DatabaseAdapter {
             Station station = new Station(name, address, phone_number, total_f, total_v, lat, lon);
             stationsList.add(station);
         }
+        cursor.close();
         return stationsList;
     }
 
@@ -81,10 +86,11 @@ public class DatabaseAdapter {
             Tip tip = new Tip(topic, sub_topic);
             tipsList.add(tip);
         }
+        cursor.close();
         return tipsList;
     }
 
-    private static class DatabaseHelper extends SQLiteOpenHelper {
+    private static class DatabaseHelper extends SQLiteAssetHelper {
 
         private static final String DATABASE_NAME = "Firefighters.db";
         private static final String TABLE_NAME1 = "contact_list";
@@ -112,14 +118,6 @@ public class DatabaseAdapter {
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         }
     }
 }
