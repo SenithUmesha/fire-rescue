@@ -134,4 +134,7 @@
     <string name="news_title">News</string>
     <string name="ws_date_and_time"><![CDATA[Date & time]]></string>
     <string name="ws_date_and_time_txt"><![CDATA[Date & time]]></string>
+    <string name="cw_title">Chief\'s Welcome</string>
+    <string name="cw_message">Welcome and thanks for visiting the Colombo Fire Brigade mobile app. We believe this app will be able to make the service you provide more efficient.\n\nIt\'s our goal to continue to develop and enhance the app as another way to help our staff.\n\nIt\'s pleasure to lead this department as we grow and advance in a manner fitting and proper for the community. We continue to evaluate services and programs to ensure they are delivered and professional and well trained manner. We also enjoy leading a hand in activities that make our community what it is.\n\nIf you still have questions feel to contact us.</string>
+    <string name="cw_chief_name">Chief\nColombo Fire Brigade</string>
 </resources>

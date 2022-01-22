@@ -77,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        card_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChiefsWelcome.class);
+                startActivity(intent);
+            }
+        });
+
         card_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

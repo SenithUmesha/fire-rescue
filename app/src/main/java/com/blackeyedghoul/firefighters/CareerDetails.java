@@ -43,7 +43,7 @@ public class CareerDetails extends AppCompatActivity {
         location.setText(l);
         age.setText(a);
         description.setText(de);
-        salary.setText(s);
+        salary.setText(s + " annual");
         education.setText(ed);
 
         try {

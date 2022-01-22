@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +22,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import com.airbnb.lottie.L;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -43,6 +38,7 @@ public class WitnessStatements extends AppCompatActivity {
 
     ImageView back, erase;
     EditText dateAndTime, dob, email, name, add_notes;
+    String mDate, mDob, mEmail, mName, mNotes;
     Button submit;
 
     @Override
@@ -85,6 +81,8 @@ public class WitnessStatements extends AppCompatActivity {
                 name.getText().clear();
                 add_notes.getText().clear();
                 email.getText().clear();
+
+                Toast.makeText(WitnessStatements.this, "Cleared!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,7 +100,15 @@ public class WitnessStatements extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
+
+                                mName = name.getText().toString();
+                                mDob = dob.getText().toString();
+                                mDate = dateAndTime.getText().toString();
+                                mNotes = add_notes.getText().toString();
+                                mEmail = email.getText().toString();
+
                                 sendMail();
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -189,14 +195,45 @@ public class WitnessStatements extends AppCompatActivity {
 
     private void sendMail() {
 
-        String val = email.getText().toString();
+            if (!TextUtils.isEmpty(mEmail)) {
 
-        if (!val.isEmpty()) {
+                String mail = MainActivity.sending_mail;
+                String password = MainActivity.sending_password;
+                String body = "Name: " + mName + "\nD.O.B: " + mDob + "\nDate & Time: " + mDate + "\nAdditional Notes: " + mNotes;
+                String subject = "Witness Statements: " + mName;
+
+                Properties properties = new Properties();
+
+                properties.put("mail.smtp.auth", true);
+                properties.put("mail.smtp.starttls.enable", true);
+                properties.put("mail.smtp.host", "smtp.gmail.com");
+                properties.put("mail.smtp.port", "587");
+
+                Session session = Session.getInstance(properties,
+                        new javax.mail.Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(mail, password);
+                            }
+                        });
+
+                try {
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(mail));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mEmail));
+                    message.setSubject(subject);
+                    message.setText(body);
+                    Transport.send(message);
+
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
 
             String mail = MainActivity.sending_mail;
             String password = MainActivity.sending_password;
-            String body = "Name: " + name.getText().toString() + "\nD.O.B: " + dob.getText().toString() + "\nDate & Time: " + dateAndTime.getText().toString() + "\nAdditional Notes: " + add_notes.getText().toString() + "\nEmail: " + email.getText().toString();
-            String subject = "Witness Statements: " + name.getText().toString();
+            String body = "Name: " + mName + "\nD.O.B: " + mDob + "\nDate & Time: " + mDate + "\nAdditional Notes: " + mNotes;
+            String subject = "Witness Statements: " + mName;
 
             Properties properties = new Properties();
 
@@ -216,7 +253,7 @@ public class WitnessStatements extends AppCompatActivity {
             try {
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(mail));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getText().toString()));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("34senith@gmail.com"));
                 message.setSubject(subject);
                 message.setText(body);
                 Transport.send(message);
@@ -224,39 +261,6 @@ public class WitnessStatements extends AppCompatActivity {
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
-        }
-
-        String mail = "senithumeshac@gmail.com";
-        String password = "senithumeshac#";
-        String body = "Name: " + name.getText().toString() + "\nD.O.B: " + dob.getText().toString() + "\nDate & Time: " + dateAndTime.getText().toString() + "\nAdditional Notes: " + add_notes.getText().toString() + "\nEmail: " + email.getText().toString();
-        String subject = "Witness Statements: " + name.getText().toString();
-
-        Properties properties = new Properties();
-
-        properties.put("mail.smtp.auth", true);
-        properties.put("mail.smtp.starttls.enable", true);
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(properties,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(mail, password);
-                    }
-                });
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(mail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("34senith@gmail.com"));
-            message.setSubject(subject);
-            message.setText(body);
-            Transport.send(message);
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     private boolean validateEmail() {
@@ -310,6 +314,7 @@ public class WitnessStatements extends AppCompatActivity {
     }
 
     private void showDOBDialog(EditText dob) {
+
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -326,6 +331,7 @@ public class WitnessStatements extends AppCompatActivity {
     }
 
     private void showDateAndTimeDialog(EditText dateAndTime) {
+
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
