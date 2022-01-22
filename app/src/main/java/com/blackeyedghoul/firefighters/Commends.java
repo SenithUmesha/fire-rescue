@@ -122,10 +122,10 @@ public class Commends extends AppCompatActivity {
 
     private void sendMail() {
 
-        String mail = "senithumeshac@gmail.com";
-        String password = "senithumeshac#";
+        String mail = MainActivity.sending_mail;
+        String password = MainActivity.sending_password;
         String body = feedback.getText().toString();
-        String subject = "Commendation letter : " + name.getText().toString();
+        String subject = "Commendation letter: " + name.getText().toString();
 
         Properties properties = new Properties();
 

@@ -139,8 +139,6 @@ public class LiveDispatch extends AppCompatActivity {
                 updatedStatus = snapshot
                         .child("status")
                         .getValue().toString();
-
-                Log.d("hello", "url: "+updatedUrl+" status: "+updatedStatus);
             }
 
             @Override

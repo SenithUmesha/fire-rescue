@@ -5,9 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -15,9 +13,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-public class SocialMedia extends AppCompatActivity {
+public class News extends AppCompatActivity {
 
     WebView webView;
     ProgressBar progressBar;
@@ -28,8 +25,8 @@ public class SocialMedia extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_social_media);
-        getWindow().setStatusBarColor(ContextCompat.getColor(SocialMedia.this, R.color.dark_red));
+        setContentView(R.layout.activity_news);
+        getWindow().setStatusBarColor(ContextCompat.getColor(News.this, R.color.dark_red));
 
         init();
 
@@ -49,7 +46,6 @@ public class SocialMedia extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 swipeRefreshLayout.setRefreshing(false);
-
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -62,7 +58,7 @@ public class SocialMedia extends AppCompatActivity {
             }
         });
 
-        webView.loadUrl("https://www.facebook.com/colombofirebrigade");
+       webView.loadUrl("https://www.google.com/search?q=colombo+fire+brigade&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjKpKm2n8P1AhXjH7cAHUocDawQ_AUoA3oECAEQBQ");
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -80,10 +76,10 @@ public class SocialMedia extends AppCompatActivity {
     }
 
     private void init() {
-        webView = findViewById(R.id.sm_webView);
-        progressBar = findViewById(R.id.sm_pb);
-        back = findViewById(R.id.sm_back);
-        swipeRefreshLayout = findViewById(R.id.sm_swipeContainer);
+        webView = findViewById(R.id.news_webView);
+        progressBar = findViewById(R.id.news_pb);
+        back = findViewById(R.id.news_back);
+        swipeRefreshLayout = findViewById(R.id.news_swipeContainer);
     }
 
     @Override

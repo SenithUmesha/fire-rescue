@@ -56,7 +56,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-messaging'
     implementation ('eu.livotov.labs.android:CAMView:2.0.1@aar') {transitive=true}
-
 }
 
 apply plugin: 'com.google.gms.google-services'

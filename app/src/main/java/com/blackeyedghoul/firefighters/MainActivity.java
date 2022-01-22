@@ -29,6 +29,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
     TextView tempTxt;
+    DatabaseReference databaseReference;
+    public static String sending_mail, sending_password;
     DecimalFormat df = new DecimalFormat("#");
     MenuItem item1, item2, item3, item4, item5;
     CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8, card_9;
@@ -152,6 +159,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                item2.setChecked(true);
+                Intent intent = new Intent(MainActivity.this, News.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -173,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getWeatherDetails();
+
+        getSendingMail();
     }
 
     @Override
@@ -254,5 +273,27 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
         return (wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected());
+    }
+
+    public void getSendingMail() {
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("sending_mails");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                sending_mail = snapshot
+                        .child("email")
+                        .getValue().toString();
+
+                sending_password = snapshot
+                        .child("password")
+                        .getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
     }
 }
