@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
     TextView tempTxt;
+    ImageView settings;
     DatabaseReference databaseReference;
     public static String sending_mail, sending_password;
     DecimalFormat df = new DecimalFormat("#");
@@ -197,6 +199,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
+                startActivity(intent);
+            }
+        });
+
         getWeatherDetails();
 
         getSendingMail();
@@ -235,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
         item3 = bottomNavigationView.getMenu().findItem(R.id.events);
         item4 = bottomNavigationView.getMenu().findItem(R.id.social_media);
         item5 = bottomNavigationView.getMenu().findItem(R.id.holder);
+        settings = findViewById(R.id.settings);
     }
 
     private void getWeatherDetails() {
@@ -286,7 +297,6 @@ public class MainActivity extends AppCompatActivity {
     public void getSendingMail() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("sending_mails");
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -39,7 +39,7 @@ public class LiveDispatch extends AppCompatActivity {
         setContentView(R.layout.activity_live_dispatch);
         getWindow().setStatusBarColor(ContextCompat.getColor(LiveDispatch.this, R.color.dark_red));
 
-        Init();
+        init();
 
         pause.setVisibility(View.GONE);
         MediaPlayer mp = new MediaPlayer();
@@ -159,7 +159,7 @@ public class LiveDispatch extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void Init() {
+    private void init() {
         play = findViewById(R.id.ld_play);
         pause = findViewById(R.id.ld_pause);
         volumeBar = findViewById(R.id.ld_seekBar);
