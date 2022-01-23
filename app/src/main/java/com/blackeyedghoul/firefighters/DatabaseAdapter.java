@@ -1,5 +1,6 @@
 package com.blackeyedghoul.firefighters;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,10 +17,43 @@ public class DatabaseAdapter {
     List<Contacts> contactsList = new ArrayList<>();
     List<Station> stationsList = new ArrayList<>();
     List<Tip> tipsList = new ArrayList<>();
+    List<Notification> notificationList = new ArrayList<>();
 
     public DatabaseAdapter(Context context) {
         helper = new DatabaseHelper(context);
-        db = helper.getReadableDatabase();
+        db = helper.getWritableDatabase();
+    }
+
+    public void DeleteData(Notification notification) {
+        db.delete(DatabaseHelper.TABLE_NAME4, "n_time = '" + notification.getDate() + "'", null);
+    }
+
+    public void insertData(Notification notification) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("n_title", notification.getTitle());
+        contentValues.put("n_body", notification.getBody());
+        contentValues.put("n_time", notification.getDate());
+        db.insert(DatabaseHelper.TABLE_NAME4, null, contentValues);
+        db.close();
+    }
+
+    public List<Notification> getAllAlerts() {
+        String[] columns = {DatabaseHelper.KEY_N_TITLE, DatabaseHelper.KEY_N_BODY, DatabaseHelper.KEY_N_TIME};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME4, columns, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            int index1 = cursor.getColumnIndex(DatabaseHelper.KEY_N_TITLE);
+            String title = cursor.getString(index1);
+            int index2 = cursor.getColumnIndex(DatabaseHelper.KEY_N_BODY);
+            String body = cursor.getString(index2);
+            int index3 = cursor.getColumnIndex(DatabaseHelper.KEY_N_TIME);
+            String time = cursor.getString(index3);
+
+            Notification notification = new Notification(title, body, time);
+            notificationList.add(notification);
+        }
+        cursor.close();
+        return notificationList;
     }
 
     public List<Contacts> getAllContacts() {
@@ -96,6 +130,7 @@ public class DatabaseAdapter {
         private static final String TABLE_NAME1 = "contact_list";
         private static final String TABLE_NAME2 = "station_list";
         private static final String TABLE_NAME3 = "tips";
+        private static final String TABLE_NAME4 = "notification_list";
 
         private static final int DATABASE_VERSION = 2;
 
@@ -115,6 +150,10 @@ public class DatabaseAdapter {
 
         private static final String KEY_TIP_TOPIC = "tip_topic";
         private static final String KEY_TIP_SUB_TOPIC = "tip_sub_topic";
+
+        private static final String KEY_N_TITLE = "n_title";
+        private static final String KEY_N_BODY = "n_body";
+        private static final String KEY_N_TIME = "n_time";
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
