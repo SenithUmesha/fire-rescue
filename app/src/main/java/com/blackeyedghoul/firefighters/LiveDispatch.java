@@ -31,6 +31,7 @@ public class LiveDispatch extends AppCompatActivity {
     LottieAnimationView ripple;
     AudioManager audioManager;
     TextView feedStatus;
+    MediaPlayer mp;
     DatabaseReference databaseReference;
 
     @Override
@@ -42,7 +43,7 @@ public class LiveDispatch extends AppCompatActivity {
         init();
 
         pause.setVisibility(View.GONE);
-        MediaPlayer mp = new MediaPlayer();
+        mp = new MediaPlayer();
 
         setUrlAndStatus();
 
@@ -123,6 +124,12 @@ public class LiveDispatch extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mp.stop();
     }
 
     private void setUrlAndStatus() {
