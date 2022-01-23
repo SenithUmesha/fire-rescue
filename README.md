@@ -1,6 +1,6 @@
 # Fire Rescue App
 
-This app based on Java to help firefighters provide a efficient and quality service to the community. 
+This app based on Java to make the life of firefighters easier by implementing features which they need in their day-to-day life.
 
 ## Screenshots 📱
 
