@@ -14,10 +14,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,8 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -135,13 +139,8 @@ public class MainActivity extends AppCompatActivity {
         card_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (isConnected(MainActivity.this)) {
-                    Intent intent = new Intent(MainActivity.this, QRScannerHome.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(MainActivity.this, QRScannerHome.class);
+                startActivity(intent);
             }
         });
 
@@ -177,14 +176,9 @@ public class MainActivity extends AppCompatActivity {
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
-                if (isConnected(MainActivity.this)) {
-                    item1.setChecked(true);
-                    Intent intent = new Intent(MainActivity.this, Notifications.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
-                }
+                item1.setChecked(true);
+                Intent intent = new Intent(MainActivity.this, Notifications.class);
+                startActivity(intent);
                 return true;
             }
         });
@@ -346,7 +340,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
 }
