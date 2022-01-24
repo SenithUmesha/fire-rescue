@@ -62,12 +62,7 @@ public class QRScannerHome extends AppCompatActivity {
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (MainActivity.isConnected(QRScannerHome.this)) {
-                    checkMyPermission();
-                } else {
-                    Toast.makeText(QRScannerHome.this, "Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
-                }
+                checkMyPermission();
             }
         });
 
