@@ -48,7 +48,7 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         try {
             databaseAdapter = new DatabaseAdapter(this);
-            databaseAdapter.insertData(new com.blackeyedghoul.firefighters.Notification(title, body, date));
+            databaseAdapter.insertDataAlerts(new com.blackeyedghoul.firefighters.Notification(title, body, date));
             Log.d("isNotificationRecorded", "True");
         } catch (Exception e) {
             Log.d("isNotificationRecorded", "False");

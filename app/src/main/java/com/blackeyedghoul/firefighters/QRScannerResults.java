@@ -29,8 +29,7 @@ import java.util.regex.Pattern;
 
 public class QRScannerResults extends AppCompatActivity {
 
-    DatabaseReference reference;
-    Scan scan;
+    DatabaseAdapter databaseAdapter;
     ImageView back;
     TextView contentText;
     ConstraintLayout constraintLayout;
@@ -50,31 +49,24 @@ public class QRScannerResults extends AppCompatActivity {
 
         contentText.setText(content);
 
-        scan = new Scan();
-        scan.setData(content);
-        scan.setTime(time);
-        reference = FirebaseDatabase.getInstance().getReference().child("scans");
-        reference.push().setValue(scan, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                if (error == null) {
-                    constraintLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Pattern p = Pattern.compile(URL_REGEX);
-                            Matcher m = p.matcher(content);
-                            if (m.find()) {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(content)));
-                            } else {
-                                Toast.makeText(QRScannerResults.this, "Content is not openable!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(getApplicationContext(), "Scan record: Fail", Toast.LENGTH_SHORT).show();
+        databaseAdapter = new DatabaseAdapter(this);
+        long isSuccess = databaseAdapter.insertDataScans(new Scan(content, time));
+        if (isSuccess != -1) {
+            constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Pattern p = Pattern.compile(URL_REGEX);
+                    Matcher m = p.matcher(content);
+                    if (m.find()) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(content)));
+                    } else {
+                        Toast.makeText(QRScannerResults.this, "Content is not openable!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), "Scan record: Fail", Toast.LENGTH_SHORT).show();
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

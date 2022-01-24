@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -32,6 +34,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
 
 public class QRScannerHome extends AppCompatActivity {
 
@@ -42,7 +46,7 @@ public class QRScannerHome extends AppCompatActivity {
     List<Scan> scanList;
     QRHistoryAdapter adapter;
     View bottomSheet;
-    DatabaseReference databaseReference;
+    DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,6 @@ public class QRScannerHome extends AppCompatActivity {
         init();
 
         scanList = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference("scans");
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
         capture.setOnClickListener(new View.OnClickListener() {
@@ -75,30 +78,67 @@ public class QRScannerHome extends AppCompatActivity {
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!scanList.isEmpty()) {
-                    scanList.clear();
-                }
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Scan data = ds.getValue(Scan.class);
-                    scanList.add(data);
-                }
-                adapter = new QRHistoryAdapter(recyclerView, QRScannerHome.this, scanList);
-                recyclerView.setAdapter(adapter);
-            }
+        PreCreateDB.copyDB(this);
+        databaseAdapter = new DatabaseAdapter(this);
+        scanList = databaseAdapter.getAllScans();
+        recyclerView.setHasFixedSize(true);
+        adapter = new QRHistoryAdapter(recyclerView, this, scanList);
+        recyclerView.setAdapter(adapter);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            int position = viewHolder.getAdapterPosition();
+
+            if (direction == ItemTouchHelper.RIGHT) {
+                String time = scanList.get(position).getTime();
+                scanList.remove(position);
+                databaseAdapter.DeleteDataScans(new Scan(null, time));
+                adapter.notifyItemRemoved(position);
+            }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeRightBackgroundColor(ContextCompat.getColor(QRScannerHome.this, R.color.dark_red))
+                    .addSwipeRightActionIcon(R.drawable.delete_alert)
+                    .create()
+                    .decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 
     public void init() {
         capture = findViewById(R.id.qrh_color_ring_inner);
         back = findViewById(R.id.qrh_back);
         bottomSheet = findViewById(R.id.qrh_bottomSheet);
         recyclerView = findViewById(R.id.qrh_recycler_view);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        scanList.clear();
+        PreCreateDB.copyDB(this);
+        databaseAdapter = new DatabaseAdapter(this);
+        scanList = databaseAdapter.getAllScans();
+        recyclerView.setHasFixedSize(true);
+        adapter = new QRHistoryAdapter(recyclerView, this, scanList);
+        recyclerView.setAdapter(adapter);
     }
 
     private void checkMyPermission() {

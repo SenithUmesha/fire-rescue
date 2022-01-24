@@ -18,17 +18,49 @@ public class DatabaseAdapter {
     List<Station> stationsList = new ArrayList<>();
     List<Tip> tipsList = new ArrayList<>();
     List<Notification> notificationList = new ArrayList<>();
+    List<Scan> scanList = new ArrayList<>();
 
     public DatabaseAdapter(Context context) {
         helper = new DatabaseHelper(context);
         db = helper.getWritableDatabase();
     }
 
-    public void DeleteData(Notification notification) {
+    public void DeleteDataScans(Scan scan) {
+        db.delete(DatabaseHelper.TABLE_NAME5, "time = '" + scan.getTime() + "'", null);
+    }
+
+    public List<Scan> getAllScans() {
+        String[] columns = {DatabaseHelper.KEY_S_H_DATA, DatabaseHelper.KEY_S_H_TIME};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME5, columns, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            int index2 = cursor.getColumnIndex(DatabaseHelper.KEY_S_H_DATA);
+            String data = cursor.getString(index2);
+            int index3 = cursor.getColumnIndex(DatabaseHelper.KEY_S_H_TIME);
+            String time = cursor.getString(index3);
+
+            Scan scan = new Scan(data, time);
+            scanList.add(scan);
+        }
+        cursor.close();
+        return scanList;
+    }
+
+    public long insertDataScans(Scan scan) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("data", scan.getData());
+        contentValues.put("time", scan.getTime());
+        long isSuccess = db.insert(DatabaseHelper.TABLE_NAME5, null, contentValues);
+        db.close();
+
+        return isSuccess;
+    }
+
+    public void DeleteDataAlerts(Notification notification) {
         db.delete(DatabaseHelper.TABLE_NAME4, "n_time = '" + notification.getDate() + "'", null);
     }
 
-    public void insertData(Notification notification) {
+    public void insertDataAlerts(Notification notification) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("n_title", notification.getTitle());
         contentValues.put("n_body", notification.getBody());
@@ -131,6 +163,7 @@ public class DatabaseAdapter {
         private static final String TABLE_NAME2 = "station_list";
         private static final String TABLE_NAME3 = "tips";
         private static final String TABLE_NAME4 = "notification_list";
+        private static final String TABLE_NAME5 = "scan_history";
 
         private static final int DATABASE_VERSION = 2;
 
@@ -154,6 +187,9 @@ public class DatabaseAdapter {
         private static final String KEY_N_TITLE = "n_title";
         private static final String KEY_N_BODY = "n_body";
         private static final String KEY_N_TIME = "n_time";
+
+        private static final String KEY_S_H_DATA = "data";
+        private static final String KEY_S_H_TIME = "time";
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);

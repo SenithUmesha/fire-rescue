@@ -73,7 +73,7 @@ public class Notifications extends AppCompatActivity {
             if (direction == ItemTouchHelper.RIGHT) {
                 String time = notificationList.get(position).getDate();
                 notificationList.remove(position);
-                databaseAdapter.DeleteData(new Notification(null, null, time));
+                databaseAdapter.DeleteDataAlerts(new Notification(null, null, time));
                 adapter.notifyItemRemoved(position);
             }
         }
