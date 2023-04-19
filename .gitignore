@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/AndroidManifest.xml
+/app/google-services.json
+/app/proguard-rules.pro
+/app/build.gradle
+build.gradle
+settings.gradle
+/app/src/main/ic_launcher-playstore.png
+/app/src/main/assets/databases/Firefighters.db
+gradle.properties
+gradlew
+gradlew.bat
