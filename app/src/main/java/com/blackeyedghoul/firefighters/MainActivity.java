@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -28,11 +27,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     TextView tempTxt;
     ImageView settings;
-    DatabaseReference databaseReference;
-    public static String sending_mail, sending_password;
     DecimalFormat df = new DecimalFormat("#");
     MenuItem item1, item2, item3, item4, item5;
     CardView card_0, card_1, card_2, card_3, card_4, card_5, card_6, card_7, card_8, card_9;
@@ -94,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Stations.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -123,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Careers.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -168,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, LiveDispatch.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -192,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, News.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -207,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Events.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -222,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, SocialMedia.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "This features is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "This feature is unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -237,8 +229,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getWeatherDetails();
-
-        getSendingMail();
     }
 
     @Override
@@ -278,40 +268,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getWeatherDetails() {
-        String tempUrl;
-
         if (!isConnected(MainActivity.this)) {
             Toast.makeText(this, "Online features will be unavailable. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
-        } else {
-            String api_key = "aa08a65605580df4a2fd2089f117b732";
-            String url = "https://api.openweathermap.org/data/2.5/weather";
-            tempUrl = url + "?q=" + "Colombo" + "&appid=" + api_key;
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.d("response", response);
-                    String output = "";
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
-                        double temp = jsonObjectMain.getDouble("temp") - 273.15;
-                        output += df.format(temp) + "°C";
-                        tempTxt.setText(output);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
+            return;
         }
+
+        String apiKey = getOpenWeatherApiKey();
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            // The public repository intentionally does not include API credentials.
+            // Add an ignored `openweather_api_key` string resource in a local secrets.xml
+            // if you want to restore the weather tile while experimenting with the app.
+            tempTxt.setText("--°C");
+            return;
+        }
+
+        String url = "https://api.openweathermap.org/data/2.5/weather";
+        String tempUrl = url + "?q=Colombo&appid=" + apiKey;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, tempUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("response", response);
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
+                    double temp = jsonObjectMain.getDouble("temp") - 273.15;
+                    tempTxt.setText(df.format(temp) + "°C");
+                } catch (JSONException e) {
+                    Log.e("weather", "Unable to parse weather response", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.w("weather", "Weather request failed", error);
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private String getOpenWeatherApiKey() {
+        int resourceId = getResources().getIdentifier(
+                "openweather_api_key",
+                "string",
+                getPackageName()
+        );
+
+        if (resourceId == 0) {
+            return null;
+        }
+
+        return getString(resourceId);
     }
 
     public static boolean isConnected(Activity activity) {
@@ -321,27 +330,5 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
         return (wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected());
-    }
-
-    public void getSendingMail() {
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("sending_mails");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                sending_mail = snapshot
-                        .child("email")
-                        .getValue().toString();
-
-                sending_password = snapshot
-                        .child("password")
-                        .getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
     }
 }
