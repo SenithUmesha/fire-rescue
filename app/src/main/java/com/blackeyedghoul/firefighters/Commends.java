@@ -1,31 +1,24 @@
 package com.blackeyedghoul.firefighters;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class Commends extends AppCompatActivity {
 
@@ -44,47 +37,19 @@ public class Commends extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(name.getText().toString()) && TextUtils.isEmpty(feedback.getText().toString())) {
-                    feedback.setError("Field can not be empty");
-                    name.setError("Field can not be empty");
-                } else if (TextUtils.isEmpty(name.getText().toString())) {
-                    name.setError("Field can not be empty");
-                } else if (TextUtils.isEmpty(feedback.getText().toString())) {
-                    feedback.setError("Field can not be empty");
-                } else {
+                if (!validateForm()) {
+                    return;
+                }
 
-                    name.setError(null);
-                    feedback.setError(null);
-
-                    if (MainActivity.isConnected(Commends.this)) {
-
-                        Thread thread = new Thread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                try {
-                                    sendMail();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-
-                        thread.start();
-
-                        runAlertSuccess();
-                    } else {
-                        runAlertFail();
-                    }
-
+                if (openMailDraft()) {
+                    runAlertSuccess();
                     name.getText().clear();
                     feedback.getText().clear();
+                } else {
+                    runAlertFail();
                 }
             }
         });
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +59,52 @@ public class Commends extends AppCompatActivity {
         });
     }
 
-    private void runAlertSuccess() {
+    private boolean validateForm() {
+        boolean valid = true;
 
+        if (TextUtils.isEmpty(name.getText().toString().trim())) {
+            name.setError("Field can not be empty");
+            valid = false;
+        } else {
+            name.setError(null);
+        }
+
+        if (TextUtils.isEmpty(feedback.getText().toString().trim())) {
+            feedback.setError("Field can not be empty");
+            valid = false;
+        } else {
+            feedback.setError(null);
+        }
+
+        return valid;
+    }
+
+    /**
+     * The original prototype sent SMTP mail directly from the Android client.
+     * The public snapshot intentionally avoids shipping or downloading mail
+     * credentials. Instead it hands a pre-filled draft to the user's mail app.
+     */
+    private boolean openMailDraft() {
+        String senderName = name.getText().toString().trim();
+        String messageBody = feedback.getText().toString().trim();
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Commendation / feedback from " + senderName);
+        intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Name: " + senderName + "\n\n" + messageBody
+        );
+
+        try {
+            startActivity(Intent.createChooser(intent, "Send feedback with"));
+            return true;
+        } catch (ActivityNotFoundException exception) {
+            return false;
+        }
+    }
+
+    private void runAlertSuccess() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 Commends.this, R.style.BottomSheetDialogTheme
         );
@@ -105,9 +114,12 @@ public class Commends extends AppCompatActivity {
                         findViewById(R.id.cm_success_alert_box)
                 );
 
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 20);
+        ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(background, 20);
         bottomSheetDialog.getWindow().setBackgroundDrawable(inset);
+
+        TextView subTitle = bottomSheetView.findViewById(R.id.cm_success_subT);
+        subTitle.setText("Your email app has been opened. Send the draft to finish.");
 
         bottomSheetView.findViewById(R.id.cm_close).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,41 +132,6 @@ public class Commends extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
-    private void sendMail() {
-
-        String mail = MainActivity.sending_mail;
-        String password = MainActivity.sending_password;
-        String body = feedback.getText().toString();
-        String subject = "Commendation letter: " + name.getText().toString();
-
-        Properties properties = new Properties();
-
-        properties.put("mail.smtp.auth", true);
-        properties.put("mail.smtp.starttls.enable", true);
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(properties,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(mail, password);
-                    }
-                });
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(mail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("34senith@gmail.com"));
-            message.setSubject(subject);
-            message.setText(body);
-            Transport.send(message);
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void runAlertFail() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 Commends.this, R.style.BottomSheetDialogTheme
@@ -165,9 +142,12 @@ public class Commends extends AppCompatActivity {
                         findViewById(R.id.cm_fail_alert_box)
                 );
 
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 20);
+        ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(background, 20);
         bottomSheetDialog.getWindow().setBackgroundDrawable(inset);
+
+        TextView subTitle = bottomSheetView.findViewById(R.id.cm_fail_subT);
+        subTitle.setText("No email app is available to open the draft.");
 
         bottomSheetView.findViewById(R.id.cm_close_fail).setOnClickListener(new View.OnClickListener() {
             @Override
