@@ -1,15 +1,15 @@
 package com.blackeyedghoul.firefighters;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,23 +22,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class WitnessStatements extends AppCompatActivity {
 
     ImageView back, erase;
     EditText dateAndTime, dob, email, name, add_notes;
-    String mDate, mDob, mEmail, mName, mNotes;
     Button submit;
 
     @Override
@@ -76,12 +69,7 @@ public class WitnessStatements extends AppCompatActivity {
         erase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dateAndTime.getText().clear();
-                dob.getText().clear();
-                name.getText().clear();
-                add_notes.getText().clear();
-                email.getText().clear();
-
+                clearForm();
                 Toast.makeText(WitnessStatements.this, "Cleared!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -93,50 +81,56 @@ public class WitnessStatements extends AppCompatActivity {
                     return;
                 }
 
-                if (MainActivity.isConnected(WitnessStatements.this)) {
-
-                    Thread thread = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-
-                                mName = name.getText().toString();
-                                mDob = dob.getText().toString();
-                                mDate = dateAndTime.getText().toString();
-                                mNotes = add_notes.getText().toString();
-                                mEmail = email.getText().toString();
-
-                                sendMail();
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-                    thread.start();
-
+                if (openMailDraft()) {
                     runAlertSuccess();
+                    clearForm();
                 } else {
                     runAlertFail();
                 }
-
-                dateAndTime.getText().clear();
-                dob.getText().clear();
-                name.getText().clear();
-                add_notes.getText().clear();
-                email.getText().clear();
             }
         });
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
     }
 
-    @SuppressLint("SetTextI18n")
-    private void runAlertSuccess() {
+    /**
+     * This historical project originally authenticated directly to SMTP from
+     * the Android client. The public snapshot intentionally does not handle
+     * mail credentials. A pre-filled draft is handed to an installed mail app
+     * instead, leaving delivery and account authentication outside the app.
+     */
+    private boolean openMailDraft() {
+        String witnessName = name.getText().toString().trim();
+        String witnessDob = dob.getText().toString().trim();
+        String incidentDate = dateAndTime.getText().toString().trim();
+        String contactEmail = email.getText().toString().trim();
+        String notes = add_notes.getText().toString().trim();
 
+        StringBuilder body = new StringBuilder()
+                .append("Name: ").append(witnessName)
+                .append("\nD.O.B: ").append(witnessDob)
+                .append("\nDate & Time: ").append(incidentDate);
+
+        if (!contactEmail.isEmpty()) {
+            body.append("\nContact Email: ").append(contactEmail);
+        }
+
+        if (!notes.isEmpty()) {
+            body.append("\nAdditional Notes: ").append(notes);
+        }
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Witness statement: " + witnessName);
+        intent.putExtra(Intent.EXTRA_TEXT, body.toString());
+
+        try {
+            startActivity(Intent.createChooser(intent, "Send witness statement with"));
+            return true;
+        } catch (ActivityNotFoundException exception) {
+            return false;
+        }
+    }
+
+    private void runAlertSuccess() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 WitnessStatements.this, R.style.BottomSheetDialogTheme
         );
@@ -146,12 +140,12 @@ public class WitnessStatements extends AppCompatActivity {
                         findViewById(R.id.cm_success_alert_box)
                 );
 
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 20);
+        ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(background, 20);
         bottomSheetDialog.getWindow().setBackgroundDrawable(inset);
 
-        TextView subT = bottomSheetView.findViewById(R.id.cm_success_subT);
-        subT.setText("Your report has been sent.");
+        TextView subTitle = bottomSheetView.findViewById(R.id.cm_success_subT);
+        subTitle.setText("Your email app has been opened. Send the draft to finish.");
 
         bottomSheetView.findViewById(R.id.cm_close).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +158,6 @@ public class WitnessStatements extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
-    @SuppressLint("SetTextI18n")
     private void runAlertFail() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 WitnessStatements.this, R.style.BottomSheetDialogTheme
@@ -175,12 +168,12 @@ public class WitnessStatements extends AppCompatActivity {
                         findViewById(R.id.cm_fail_alert_box)
                 );
 
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 20);
+        ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(background, 20);
         bottomSheetDialog.getWindow().setBackgroundDrawable(inset);
 
-        TextView subT = bottomSheetView.findViewById(R.id.cm_fail_subT);
-        subT.setText("Report submission failed.");
+        TextView subTitle = bottomSheetView.findViewById(R.id.cm_fail_subT);
+        subTitle.setText("No email app is available to open the draft.");
 
         bottomSheetView.findViewById(R.id.cm_close_fail).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,86 +186,23 @@ public class WitnessStatements extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
-    private void sendMail() {
-
-            if (!TextUtils.isEmpty(mEmail)) {
-
-                String mail = MainActivity.sending_mail;
-                String password = MainActivity.sending_password;
-                String body = "Name: " + mName + "\nD.O.B: " + mDob + "\nDate & Time: " + mDate + "\nAdditional Notes: " + mNotes;
-                String subject = "Witness Statements: " + mName;
-
-                Properties properties = new Properties();
-
-                properties.put("mail.smtp.auth", true);
-                properties.put("mail.smtp.starttls.enable", true);
-                properties.put("mail.smtp.host", "smtp.gmail.com");
-                properties.put("mail.smtp.port", "587");
-
-                Session session = Session.getInstance(properties,
-                        new javax.mail.Authenticator() {
-                            @Override
-                            protected PasswordAuthentication getPasswordAuthentication() {
-                                return new PasswordAuthentication(mail, password);
-                            }
-                        });
-
-                try {
-                    Message message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(mail));
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mEmail));
-                    message.setSubject(subject);
-                    message.setText(body);
-                    Transport.send(message);
-
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            String mail = MainActivity.sending_mail;
-            String password = MainActivity.sending_password;
-            String body = "Name: " + mName + "\nD.O.B: " + mDob + "\nDate & Time: " + mDate + "\nAdditional Notes: " + mNotes;
-            String subject = "Witness Statements: " + mName;
-
-            Properties properties = new Properties();
-
-            properties.put("mail.smtp.auth", true);
-            properties.put("mail.smtp.starttls.enable", true);
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", "587");
-
-            Session session = Session.getInstance(properties,
-                    new javax.mail.Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(mail, password);
-                        }
-                    });
-
-            try {
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(mail));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("34senith@gmail.com"));
-                message.setSubject(subject);
-                message.setText(body);
-                Transport.send(message);
-
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+    private void clearForm() {
+        dateAndTime.getText().clear();
+        dob.getText().clear();
+        name.getText().clear();
+        add_notes.getText().clear();
+        email.getText().clear();
     }
 
     private boolean validateEmail() {
         String val = email.getText().toString();
         String checkForLetters = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-        if (!val.isEmpty()) {
-            if (!val.matches(checkForLetters)) {
-                email.setError("Invalid email!");
-                return false;
-            }
+        if (!val.isEmpty() && !val.matches(checkForLetters)) {
+            email.setError("Invalid email!");
+            return false;
         }
+
         email.setError(null);
         return true;
     }
@@ -283,10 +213,10 @@ public class WitnessStatements extends AppCompatActivity {
         if (val.isEmpty()) {
             dateAndTime.setError("Field can not be empty");
             return false;
-        } else {
-            dateAndTime.setError(null);
-            return true;
         }
+
+        dateAndTime.setError(null);
+        return true;
     }
 
     private boolean validateDOB() {
@@ -295,10 +225,10 @@ public class WitnessStatements extends AppCompatActivity {
         if (val.isEmpty()) {
             dob.setError("Field can not be empty");
             return false;
-        } else {
-            dob.setError(null);
-            return true;
         }
+
+        dob.setError(null);
+        return true;
     }
 
     private boolean validateName() {
@@ -307,56 +237,74 @@ public class WitnessStatements extends AppCompatActivity {
         if (val.isEmpty()) {
             name.setError("Field can not be empty");
             return false;
-        } else {
-            name.setError(null);
-            return true;
         }
+
+        name.setError(null);
+        return true;
     }
 
     private void showDOBDialog(EditText dob) {
-
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                calendar.set(Calendar.YEAR, i);
-                calendar.set(Calendar.MONTH, i1);
-                calendar.set(Calendar.DAY_OF_MONTH, i2);
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM, yyyy");
                 dob.setText(simpleDateFormat.format(calendar.getTime()));
             }
         };
 
-        new DatePickerDialog(WitnessStatements.this, R.style.DialogTheme, onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(
+                WitnessStatements.this,
+                R.style.DialogTheme,
+                onDateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        ).show();
     }
 
     private void showDateAndTimeDialog(EditText dateAndTime) {
-
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                calendar.set(Calendar.YEAR, i);
-                calendar.set(Calendar.MONTH, i1);
-                calendar.set(Calendar.DAY_OF_MONTH, i2);
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
 
                 TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        calendar.set(Calendar.HOUR_OF_DAY, i);
-                        calendar.set(Calendar.MINUTE, i1);
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        calendar.set(Calendar.HOUR_OF_DAY, hour);
+                        calendar.set(Calendar.MINUTE, minute);
 
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM, yyyy HH:mm");
-
                         dateAndTime.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
 
-                new TimePickerDialog(WitnessStatements.this, R.style.DialogTheme, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+                new TimePickerDialog(
+                        WitnessStatements.this,
+                        R.style.DialogTheme,
+                        timeSetListener,
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        false
+                ).show();
             }
         };
 
-        new DatePickerDialog(WitnessStatements.this, R.style.DialogTheme, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(
+                WitnessStatements.this,
+                R.style.DialogTheme,
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        ).show();
     }
 
     public void init() {
